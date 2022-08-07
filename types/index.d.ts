@@ -1,11 +1,11 @@
-interface PaginationInfoData {
+interface RAMPaginationInfo {
   count: number;
   pages: number;
   next?: string;
   prev?: string;
 }
 
-interface CharacterData {
+interface RAMCharacter {
   id: number;
   name: string;
   status: string;
@@ -26,7 +26,7 @@ interface CharacterData {
   created: string;
 }
 
-interface CharacterListChunk {
+interface RAMCharacterListChunk {
   info: PaginationInfoData;
-  results: CharacterData[];
+  results: RAMCharacterData[];
 }
