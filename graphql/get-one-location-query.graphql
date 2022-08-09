@@ -1,0 +1,11 @@
+query getOneLocation($id: ID!) {
+  location(id: $id) {
+    id
+    name
+    type
+    dimension
+    residents {
+      name
+    }
+  }
+}

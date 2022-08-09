@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
-import { GetCharactersDocument } from "../../graphql/generated";
-import Card from "../../components/card/card";
+import { GetManyCharactersDocument } from "../../graphql/generated";
+import CharacterCard from "../../components/card/character-card";
 
-const Characters: NextPage = () => {
+const CharactersPage: NextPage = () => {
   const [filter, setFilter] = useState({});
   const [page, setPage] = useState<number>();
 
-  const { loading, error, data } = useQuery(GetCharactersDocument, {
+  const { loading, error, data } = useQuery(GetManyCharactersDocument, {
     variables: { filter, page },
   });
   const [nameFilterInput, setNameFilterInput] = useState<string>("");
@@ -77,11 +77,11 @@ const Characters: NextPage = () => {
       <div className="flex flex-wrap justify-center">
         {data &&
           data.characters!.results!.map(
-            (c) => c && <Card key={"c" + c.id} character={c} />
+            (c) => c && <CharacterCard key={"c" + c.id} character={c} />
           )}
       </div>
     </>
   );
 };
 
-export default Characters;
+export default CharactersPage;

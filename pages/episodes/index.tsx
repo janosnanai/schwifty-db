@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 
-const Episodes: NextPage = () => {
+const EpisodesPage: NextPage = () => {
   return <h1>Episodes page</h1>;
 };
 
-export default Episodes;
+export default EpisodesPage;
