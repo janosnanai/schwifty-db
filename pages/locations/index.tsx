@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 
 const LocationsPage: NextPage = () => {
   return <h1>Locations page</h1>;

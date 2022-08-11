@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
-import { ChangeEvent, FormEvent, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 
 import { GetManyCharactersDocument } from "../../graphql/generated";
