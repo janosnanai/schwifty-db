@@ -14,7 +14,7 @@ query getManyCharacters($page: Int, $filter: FilterCharacter) {
       gender
       image
       location {
-        name
+        ...LocationCore
       }
     }
   }

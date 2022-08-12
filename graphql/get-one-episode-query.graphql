@@ -5,7 +5,7 @@ query getOneEpisode($id: ID!) {
     episode
     air_date
     characters {
-      name
+      ...CharacterCore
     }
   }
 }

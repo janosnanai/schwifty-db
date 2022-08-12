@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 
-import { GetOneCharacterDocument } from "../../graphql/generated";
+import { GetOneCharacterDocument } from "../../graphql/_generated";
 
 const CharacterPage: NextPage = () => {
   const router = useRouter();
@@ -30,9 +30,13 @@ const CharacterPage: NextPage = () => {
             <li>name: {data.character.name}</li>
             <li>species: {data.character.species}</li>
             <li>gender: {data.character.gender}</li>
-            <li>name: {data.character.name}</li>
-            <li>name: {data.character.name}</li>
+            <li>origin: {data.character.origin?.name}</li>
+            <li>location: {data.character.location?.name}</li>
           </ul>
+          <p>
+            <span className="">episodes: </span>
+            <span>{data.character.episode.length}</span>
+          </p>
         </div>
       )}
     </>

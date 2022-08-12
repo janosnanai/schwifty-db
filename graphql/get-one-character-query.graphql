@@ -8,14 +8,13 @@ query getOneCharacter($id: ID!) {
     gender
     image
     origin {
-      name
+      ...LocationCore
     }
     location {
-      name
+      ...LocationCore
     }
     episode {
-      name
-      episode
+      ...EpisodeCore
     }
   }
 }

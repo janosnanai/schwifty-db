@@ -1,0 +1,4 @@
+fragment LocationCore on Location {
+  id
+  name
+}

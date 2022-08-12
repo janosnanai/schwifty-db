@@ -124,7 +124,7 @@ export type Location = {
   /** The name of the location. */
   name?: Maybe<Scalars["String"]>;
   /** List of characters who have been last seen in the location. */
-  residents?: Array<Maybe<Character>>;
+  residents: Array<Maybe<Character>>;
   /** The type of the location. */
   type?: Maybe<Scalars["String"]>;
 };
@@ -196,6 +196,19 @@ export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars["ID"]>;
 };
 
+export type CharacterCoreFragment = {
+  __typename?: "Character";
+  id?: string | null;
+  name?: string | null;
+};
+
+export type EpisodeCoreFragment = {
+  __typename?: "Episode";
+  id?: string | null;
+  name?: string | null;
+  episode?: string | null;
+};
+
 export type GetManyCharactersQueryVariables = Exact<{
   page?: InputMaybe<Scalars["Int"]>;
   filter?: InputMaybe<FilterCharacter>;
@@ -220,7 +233,11 @@ export type GetManyCharactersQuery = {
       species?: string | null;
       gender?: string | null;
       image?: string | null;
-      location?: { __typename?: "Location"; name?: string | null } | null;
+      location?: {
+        __typename?: "Location";
+        id?: string | null;
+        name?: string | null;
+      } | null;
     } | null> | null;
   } | null;
 };
@@ -292,10 +309,19 @@ export type GetOneCharacterQuery = {
     type?: string | null;
     gender?: string | null;
     image?: string | null;
-    origin?: { __typename?: "Location"; name?: string | null } | null;
-    location?: { __typename?: "Location"; name?: string | null } | null;
+    origin?: {
+      __typename?: "Location";
+      id?: string | null;
+      name?: string | null;
+    } | null;
+    location?: {
+      __typename?: "Location";
+      id?: string | null;
+      name?: string | null;
+    } | null;
     episode: Array<{
       __typename?: "Episode";
+      id?: string | null;
       name?: string | null;
       episode?: string | null;
     } | null>;
@@ -316,6 +342,7 @@ export type GetOneEpisodeQuery = {
     air_date?: string | null;
     characters: Array<{
       __typename?: "Character";
+      id?: string | null;
       name?: string | null;
     } | null>;
   } | null;
@@ -333,10 +360,81 @@ export type GetOneLocationQuery = {
     name?: string | null;
     type?: string | null;
     dimension?: string | null;
-    residents: Array<{ __typename?: "Character"; name?: string | null } | null>;
+    residents: Array<{
+      __typename?: "Character";
+      id?: string | null;
+      name?: string | null;
+    } | null>;
   } | null;
 };
 
+export type LocationCoreFragment = {
+  __typename?: "Location";
+  id?: string | null;
+  name?: string | null;
+};
+
+export const CharacterCoreFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CharacterCore" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Character" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CharacterCoreFragment, unknown>;
+export const EpisodeCoreFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "EpisodeCore" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Episode" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "episode" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<EpisodeCoreFragment, unknown>;
+export const LocationCoreFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "LocationCore" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Location" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LocationCoreFragment, unknown>;
 export const GetManyCharactersDocument = {
   kind: "Document",
   definitions: [
@@ -430,8 +528,8 @@ export const GetManyCharactersDocument = {
                           kind: "SelectionSet",
                           selections: [
                             {
-                              kind: "Field",
-                              name: { kind: "Name", value: "name" },
+                              kind: "FragmentSpread",
+                              name: { kind: "Name", value: "LocationCore" },
                             },
                           ],
                         },
@@ -445,6 +543,7 @@ export const GetManyCharactersDocument = {
         ],
       },
     },
+    ...LocationCoreFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<
   GetManyCharactersQuery,
@@ -686,7 +785,10 @@ export const GetOneCharacterDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "LocationCore" },
+                      },
                     ],
                   },
                 },
@@ -696,7 +798,10 @@ export const GetOneCharacterDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "LocationCore" },
+                      },
                     ],
                   },
                 },
@@ -706,10 +811,9 @@ export const GetOneCharacterDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "episode" },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "EpisodeCore" },
                       },
                     ],
                   },
@@ -720,6 +824,8 @@ export const GetOneCharacterDocument = {
         ],
       },
     },
+    ...LocationCoreFragmentDoc.definitions,
+    ...EpisodeCoreFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<
   GetOneCharacterQuery,
@@ -771,7 +877,10 @@ export const GetOneEpisodeDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "CharacterCore" },
+                      },
                     ],
                   },
                 },
@@ -781,6 +890,7 @@ export const GetOneEpisodeDocument = {
         ],
       },
     },
+    ...CharacterCoreFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetOneEpisodeQuery, GetOneEpisodeQueryVariables>;
 export const GetOneLocationDocument = {
@@ -829,7 +939,10 @@ export const GetOneLocationDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "CharacterCore" },
+                      },
                     ],
                   },
                 },
@@ -839,5 +952,6 @@ export const GetOneLocationDocument = {
         ],
       },
     },
+    ...CharacterCoreFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetOneLocationQuery, GetOneLocationQueryVariables>;

@@ -5,7 +5,7 @@ query getOneLocation($id: ID!) {
     type
     dimension
     residents {
-      name
+      ...CharacterCore
     }
   }
 }

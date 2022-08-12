@@ -4,7 +4,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 
-import { GetManyCharactersDocument } from "../../graphql/generated";
+import { GetManyCharactersDocument } from "../../graphql/_generated";
 import CharacterCard from "../../components/card/character-card";
 
 const CharactersPage: NextPage = () => {
