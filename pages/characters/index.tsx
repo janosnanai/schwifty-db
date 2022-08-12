@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import type { ChangeEvent, FormEvent } from "react";
+import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
@@ -8,13 +9,14 @@ import { GetManyCharactersDocument } from "../../graphql/_generated";
 import CharacterCard from "../../components/card/character-card";
 
 const CharactersPage: NextPage = () => {
-  const [filter, setFilter] = useState({});
-  const [page, setPage] = useState<number>();
-
-  const { loading, error, data } = useQuery(GetManyCharactersDocument, {
-    variables: { filter, page },
-  });
+  const [filter, setFilter] = useState<FilterCharacter>({});
   const [nameFilterInput, setNameFilterInput] = useState<string>("");
+  const { loading, error, data, fetchMore } = useQuery(
+    GetManyCharactersDocument,
+    {
+      variables: { filter },
+    }
+  );
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -26,17 +28,17 @@ const CharactersPage: NextPage = () => {
     setNameFilterInput(event.target.value);
   }
 
-  function handleFetchPrev() {
-    if (!data) {
-      return;
+  function handleFetchMore() {
+    if (!data) return;
+    if (!data.characters) return;
+    if (!data.characters.info) return;
+    if (data.characters.info.next) {
+      fetchMore({
+        variables: {
+          page: data.characters.info.next,
+        },
+      });
     }
-    setPage(data.characters!.info!.prev!);
-  }
-  async function handleFetchNext() {
-    if (!data) {
-      return;
-    }
-    setPage(data.characters!.info!.next!);
   }
 
   return (
@@ -50,20 +52,13 @@ const CharactersPage: NextPage = () => {
             placeholder="type filter here..."
           />
         </form>
-        <div className="space-x-3">
+        <div>
           <button
-            onClick={handleFetchPrev}
-            disabled={loading || (data && !data.characters!.info!.prev)}
-            className="border px-3 py-1 bg-slate-100 hover:text-slate-900 disabled:text-slate-400 enabled:hover:shadow enabled:hover:shadow-lime-200"
-          >
-            prev
-          </button>
-          <button
-            onClick={handleFetchNext}
+            onClick={handleFetchMore}
             disabled={loading || (data && !data.characters!.info!.next)}
             className="border px-3 py-1 bg-slate-100 hover:text-slate-900 disabled:text-slate-400 enabled:hover:shadow enabled:hover:shadow-lime-200"
           >
-            next
+            load more
           </button>
         </div>
         {data && data.characters!.info && (

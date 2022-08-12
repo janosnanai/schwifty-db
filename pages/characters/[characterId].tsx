@@ -13,8 +13,6 @@ const CharacterPage: NextPage = () => {
     variables: { id: characterId as string },
   });
 
-  console.log(data);
-
   return (
     <>
       <h1 className="text-2xl">{`single character page for character # ${characterId}`}</h1>
