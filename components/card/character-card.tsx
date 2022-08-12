@@ -1,4 +1,4 @@
-import type { Character } from "../../graphql/generated";
+import type { CharacterCardFragment } from "../../graphql/_generated";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ const FALLBACK_IMG_URL =
   "https://rickandmortyapi.com/api/character/avatar/19.jpeg";
 const FALLBACK_PROP_TEXT = "unknown";
 
-function CharacterCard({ character }: { character: Partial<Character> }) {
+function CharacterCard({ character }: { character: CharacterCardFragment }) {
   return (
     <article className="group flex m-2 bg-slate-50 shadow rounded-md overflow-hidden h-52 w-[36rem]">
       <div className="w-1/3 relative">

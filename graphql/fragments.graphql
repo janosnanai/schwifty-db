@@ -1,0 +1,41 @@
+fragment CharacterCard on Character {
+  id
+  name
+  status
+  species
+  gender
+  image
+  location {
+    ...LocationCore
+  }
+}
+
+fragment CharacterCore on Character {
+  id
+  name
+}
+
+fragment EpisodeCard on Episode {
+  id
+  name
+  episode
+  air_date
+}
+
+fragment EpisodeCore on Episode {
+  id
+  name
+  episode
+}
+
+fragment LocationCard on Location {
+  id
+  name
+  type
+  dimension
+}
+
+fragment LocationCore on Location {
+  id
+  name
+}

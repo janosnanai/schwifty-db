@@ -196,10 +196,33 @@ export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars["ID"]>;
 };
 
+export type CharacterCardFragment = {
+  __typename?: "Character";
+  id?: string | null;
+  name?: string | null;
+  status?: string | null;
+  species?: string | null;
+  gender?: string | null;
+  image?: string | null;
+  location?: {
+    __typename?: "Location";
+    id?: string | null;
+    name?: string | null;
+  } | null;
+};
+
 export type CharacterCoreFragment = {
   __typename?: "Character";
   id?: string | null;
   name?: string | null;
+};
+
+export type EpisodeCardFragment = {
+  __typename?: "Episode";
+  id?: string | null;
+  name?: string | null;
+  episode?: string | null;
+  air_date?: string | null;
 };
 
 export type EpisodeCoreFragment = {
@@ -207,6 +230,20 @@ export type EpisodeCoreFragment = {
   id?: string | null;
   name?: string | null;
   episode?: string | null;
+};
+
+export type LocationCardFragment = {
+  __typename?: "Location";
+  id?: string | null;
+  name?: string | null;
+  type?: string | null;
+  dimension?: string | null;
+};
+
+export type LocationCoreFragment = {
+  __typename?: "Location";
+  id?: string | null;
+  name?: string | null;
 };
 
 export type GetManyCharactersQueryVariables = Exact<{
@@ -368,12 +405,64 @@ export type GetOneLocationQuery = {
   } | null;
 };
 
-export type LocationCoreFragment = {
-  __typename?: "Location";
-  id?: string | null;
-  name?: string | null;
-};
-
+export const LocationCoreFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "LocationCore" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Location" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LocationCoreFragment, unknown>;
+export const CharacterCardFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "CharacterCard" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Character" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "status" } },
+          { kind: "Field", name: { kind: "Name", value: "species" } },
+          { kind: "Field", name: { kind: "Name", value: "gender" } },
+          { kind: "Field", name: { kind: "Name", value: "image" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "location" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "LocationCore" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...LocationCoreFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<CharacterCardFragment, unknown>;
 export const CharacterCoreFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -394,6 +483,28 @@ export const CharacterCoreFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<CharacterCoreFragment, unknown>;
+export const EpisodeCardFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "EpisodeCard" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "Episode" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "episode" } },
+          { kind: "Field", name: { kind: "Name", value: "air_date" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<EpisodeCardFragment, unknown>;
 export const EpisodeCoreFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -415,12 +526,12 @@ export const EpisodeCoreFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<EpisodeCoreFragment, unknown>;
-export const LocationCoreFragmentDoc = {
+export const LocationCardFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "LocationCore" },
+      name: { kind: "Name", value: "LocationCard" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Location" },
@@ -430,11 +541,13 @@ export const LocationCoreFragmentDoc = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "type" } },
+          { kind: "Field", name: { kind: "Name", value: "dimension" } },
         ],
       },
     },
   ],
-} as unknown as DocumentNode<LocationCoreFragment, unknown>;
+} as unknown as DocumentNode<LocationCardFragment, unknown>;
 export const GetManyCharactersDocument = {
   kind: "Document",
   definitions: [
@@ -506,33 +619,9 @@ export const GetManyCharactersDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "status" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "species" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "gender" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "image" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "location" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "FragmentSpread",
-                              name: { kind: "Name", value: "LocationCore" },
-                            },
-                          ],
-                        },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "CharacterCard" },
                       },
                     ],
                   },
@@ -543,7 +632,7 @@ export const GetManyCharactersDocument = {
         ],
       },
     },
-    ...LocationCoreFragmentDoc.definitions,
+    ...CharacterCardFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<
   GetManyCharactersQuery,
@@ -620,15 +709,9 @@ export const GetManyEpisodesDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "episode" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "air_date" },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "EpisodeCard" },
                       },
                     ],
                   },
@@ -639,6 +722,7 @@ export const GetManyEpisodesDocument = {
         ],
       },
     },
+    ...EpisodeCardFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<
   GetManyEpisodesQuery,
@@ -715,12 +799,9 @@ export const GetManyLocationsDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                      { kind: "Field", name: { kind: "Name", value: "type" } },
                       {
-                        kind: "Field",
-                        name: { kind: "Name", value: "dimension" },
+                        kind: "FragmentSpread",
+                        name: { kind: "Name", value: "LocationCard" },
                       },
                     ],
                   },
@@ -731,6 +812,7 @@ export const GetManyLocationsDocument = {
         ],
       },
     },
+    ...LocationCardFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<
   GetManyLocationsQuery,

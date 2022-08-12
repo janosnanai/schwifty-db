@@ -7,10 +7,7 @@ query getManyLocations($page: Int, $filter: FilterLocation) {
       prev
     }
     results {
-      id
-      name
-      type
-      dimension
+      ...LocationCard
     }
   }
 }

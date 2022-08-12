@@ -7,10 +7,7 @@ query getManyEpisodes($page: Int, $filter: FilterEpisode) {
       prev
     }
     results {
-      id
-      name
-      episode
-      air_date
+      ...EpisodeCard
     }
   }
 }

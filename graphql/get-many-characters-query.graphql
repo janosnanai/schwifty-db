@@ -7,15 +7,7 @@ query getManyCharacters($page: Int, $filter: FilterCharacter) {
       prev
     }
     results {
-      id
-      name
-      status
-      species
-      gender
-      image
-      location {
-        ...LocationCore
-      }
+      ...CharacterCard
     }
   }
 }

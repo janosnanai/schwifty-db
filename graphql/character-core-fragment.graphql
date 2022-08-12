@@ -1,4 +1,0 @@
-fragment CharacterCore on Character {
-  id
-  name
-}

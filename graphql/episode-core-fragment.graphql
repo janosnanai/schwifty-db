@@ -1,5 +1,0 @@
-fragment EpisodeCore on Episode {
-  id
-  name
-  episode
-}
