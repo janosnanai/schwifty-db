@@ -3,20 +3,23 @@ import type { ChangeEvent, FormEvent } from "react";
 import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { GetManyCharactersDocument } from "../../graphql/_generated";
 import CharacterCard from "../../components/card/character-card";
+import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 
 const CharactersPage: NextPage = () => {
   const [filter, setFilter] = useState<FilterCharacter>({});
   const [nameFilterInput, setNameFilterInput] = useState<string>("");
-  const { loading, error, data, fetchMore } = useQuery(
-    GetManyCharactersDocument,
-    {
-      variables: { filter },
-    }
-  );
+
+  const { isLoading, isError, hasNextPage, data, fetchNextPage } =
+    useInfiniteQuery(
+      ["characters", filter],
+      ({ pageParam }) => getManyCharactersQueryFn(pageParam, filter),
+      {
+        getNextPageParam: (lastPage, _pages) => lastPage.characters?.info?.next,
+      }
+    );
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -29,16 +32,7 @@ const CharactersPage: NextPage = () => {
   }
 
   function handleFetchMore() {
-    if (!data) return;
-    if (!data.characters) return;
-    if (!data.characters.info) return;
-    if (data.characters.info.next) {
-      fetchMore({
-        variables: {
-          page: data.characters.info.next,
-        },
-      });
-    }
+    fetchNextPage({ cancelRefetch: false });
   }
 
   return (
@@ -55,27 +49,26 @@ const CharactersPage: NextPage = () => {
         <div>
           <button
             onClick={handleFetchMore}
-            disabled={loading || (data && !data.characters!.info!.next)}
+            disabled={isLoading || !hasNextPage}
             className="border px-3 py-1 bg-slate-100 hover:text-slate-900 disabled:text-slate-400 enabled:hover:shadow enabled:hover:shadow-lime-200"
           >
             load more
           </button>
         </div>
-        {data && data.characters!.info && (
+        {data?.pages.length && (
           <p>
-            {`${
-              (data.characters!.info.next && data.characters!.info.next - 1) ||
-              (data.characters!.info.prev && data.characters!.info.prev + 1) ||
-              1
-            } / ${data.characters!.info.pages}`}
+            {`${data.pageParams[data.pageParams.length - 1] || 1} / ${
+              data.pages[data.pages.length - 1].characters?.info?.pages
+            }`}
           </p>
         )}
       </div>
       <div className="flex flex-wrap justify-center">
-        {data &&
-          data.characters!.results!.map(
-            (c) => c && <CharacterCard key={"c" + c.id} character={c} />
-          )}
+        {data?.pages.map((page) =>
+          page.characters?.results?.map((c) => (
+            <CharacterCard key={"c" + c!.id} character={c!} />
+          ))
+        )}
       </div>
     </>
   );

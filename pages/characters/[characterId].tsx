@@ -2,16 +2,18 @@ import type { NextPage } from "next";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@tanstack/react-query";
 
-import { GetOneCharacterDocument } from "../../graphql/_generated";
+import { getOneCharacterQueryFn } from "../../lib/api/query-functions";
 
 const CharacterPage: NextPage = () => {
   const router = useRouter();
   const { characterId } = router.query;
-  const { loading, error, data } = useQuery(GetOneCharacterDocument, {
-    variables: { id: characterId as string },
-  });
+
+  const { isLoading, isError, data } = useQuery(
+    ["character", characterId],
+    () => getOneCharacterQueryFn(characterId as string)
+  );
 
   return (
     <>
