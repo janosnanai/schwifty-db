@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import type { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useCallback } from "react";
 import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useState } from "react";
@@ -22,10 +22,11 @@ const CharactersPage: NextPage = () => {
       }
     );
 
-  const sentryRef = useInfiniteScroll(() => {
-    console.log("intersection happened");
+  const infiniteScrollCallback = useCallback(() => {
     fetchNextPage({ cancelRefetch: false });
-  });
+  }, [fetchNextPage]);
+
+  const sentryRef = useInfiniteScroll(infiniteScrollCallback, hasNextPage);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
