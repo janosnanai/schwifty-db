@@ -7,6 +7,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import CharacterCard from "../../components/card/character-card";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
+import { useInfiniteScroll } from "../../hooks/infinite-scroll-hook";
 
 const CharactersPage: NextPage = () => {
   const [filter, setFilter] = useState<FilterCharacter>({});
@@ -20,6 +21,11 @@ const CharactersPage: NextPage = () => {
         getNextPageParam: (lastPage, _pages) => lastPage.characters?.info?.next,
       }
     );
+
+  const sentryRef = useInfiniteScroll(() => {
+    console.log("intersection happened");
+    fetchNextPage({ cancelRefetch: false });
+  });
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -64,11 +70,15 @@ const CharactersPage: NextPage = () => {
         )}
       </div>
       <div className="flex flex-wrap justify-center">
+        {/* TODO: destroy this double map! */}
         {data?.pages.map((page) =>
           page.characters?.results?.map((c) => (
             <CharacterCard key={"c" + c!.id} character={c!} />
           ))
         )}
+      </div>
+      <div className="w-12 bg-red-500 text-white" ref={sentryRef}>
+        <p>sentry element</p>
       </div>
     </>
   );
