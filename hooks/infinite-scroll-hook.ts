@@ -20,7 +20,6 @@ export function useInfiniteScroll(callback: Function, hasNextPage?: boolean) {
     const observer = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
       callback();
-      console.log(entries);
     });
     observer.observe(sentryRef.current);
     return () => {

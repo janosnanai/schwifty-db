@@ -18,7 +18,8 @@
     "intersection-observer": "^0.12.2",
     "next": "12.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-spinners": "^0.13.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.11.5",

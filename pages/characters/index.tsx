@@ -5,7 +5,7 @@ import type { FilterCharacter } from "../../graphql/_generated";
 import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import CharacterCard from "../../components/card/character-card";
+import CharacterCardList from "../../components/card/character-card-list";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll } from "../../hooks/infinite-scroll-hook";
 
@@ -70,15 +70,11 @@ const CharactersPage: NextPage = () => {
           </p>
         )}
       </div>
-      <div className="flex flex-wrap justify-center">
-        {/* TODO: destroy this double map! */}
-        {data?.pages.map((page) =>
-          page.characters?.results?.map((c) => (
-            <CharacterCard key={"c" + c!.id} character={c!} />
-          ))
-        )}
-      </div>
-      <div className="w-12 bg-red-500 text-white" ref={sentryRef}>
+      <CharacterCardList pages={data?.pages} />
+      <div
+        className="w-96 m-auto text-center bg-red-500 text-white"
+        ref={sentryRef}
+      >
         <p>sentry element</p>
       </div>
     </>

@@ -3,8 +3,8 @@ import type { CharacterCardFragment } from "../../graphql/_generated";
 import Image from "next/image";
 import Link from "next/link";
 
-const FALLBACK_IMG_URL =
-  "https://rickandmortyapi.com/api/character/avatar/19.jpeg";
+import fallbackImage from "../../public/images/ram-fallback.jpeg";
+
 const FALLBACK_PROP_TEXT = "unknown";
 
 function CharacterCard({ character }: { character: CharacterCardFragment }) {
@@ -12,9 +12,9 @@ function CharacterCard({ character }: { character: CharacterCardFragment }) {
     <article className="group flex m-2 bg-slate-50 shadow rounded-md overflow-hidden h-52 w-[36rem]">
       <div className="w-1/3 relative">
         <Image
-          src={character.image || FALLBACK_IMG_URL}
+          src={character.image || fallbackImage}
           layout="fill"
-          alt={character.name || FALLBACK_IMG_URL}
+          alt={character.name || FALLBACK_PROP_TEXT}
           className="group-hover:scale-[1.03] transition ease-in duration-[1200ms] object-cover"
         />
       </div>
