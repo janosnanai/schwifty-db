@@ -15,7 +15,6 @@ function CharacterCardList({
     if (!page.characters?.results) return;
     const currentCharacters = page.characters.results as Character[];
     allCharacters.push(...currentCharacters);
-    console.log(allCharacters, page);
   });
   return (
     <div className="flex flex-wrap justify-center">
