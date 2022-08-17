@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import type { FilterCharacter } from "../../graphql/_generated";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import CharacterCardList from "../../components/card/character-card-list";
@@ -16,8 +16,6 @@ const CharactersPage: NextPage = () => {
     useInfiniteQuery(
       ["characters", filter],
       ({ pageParam }) => {
-        console.log(pageParam, filter);
-
         return getManyCharactersQueryFn(pageParam, filter);
       },
       {
@@ -25,11 +23,10 @@ const CharactersPage: NextPage = () => {
       }
     );
 
-  const infiniteScrollCallback = useCallback(() => {
-    fetchNextPage({ cancelRefetch: false });
-  }, [fetchNextPage]);
-
-  const sentryRef = useInfiniteScroll(infiniteScrollCallback, hasNextPage);
+  const sentryRef = useInfiniteScroll(
+    () => fetchNextPage({ cancelRefetch: false }),
+    hasNextPage
+  );
 
   return (
     <>
