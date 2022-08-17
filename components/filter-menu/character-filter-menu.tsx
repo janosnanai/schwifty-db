@@ -3,17 +3,23 @@ import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useReducer } from "react";
 
+import { useTimeout } from "../../hooks";
+
 function CharacterFilterMenu({
-  onSubmit,
+  onSearch,
 }: {
-  onSubmit: Dispatch<SetStateAction<FilterCharacter>>;
+  onSearch: Dispatch<SetStateAction<FilterCharacter>>;
 }) {
   const [filterInput, dispatch] = useReducer(filterReducer, initialFilter);
+  const {
+    startTimeout,
+    stopTimeout,
+    isActive: isTimeoutActive,
+  } = useTimeout(() => onSearch(filterInput), 500);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    onSubmit(filterInput);
-    // dispatch({ type: CharacterFilterActionTypes.RESET_FILTER });
+    onSearch(filterInput);
   }
 
   function handleInputChange(type: CharacterFilterActionType) {
@@ -22,7 +28,15 @@ function CharacterFilterMenu({
         type,
         payload: event.target.value,
       });
+      startTimeout();
     };
+  }
+
+  function handleFilterReset() {
+    dispatch({
+      type: CharacterFilterActionTypes.RESET_FILTER,
+    });
+    startTimeout();
   }
 
   return (
@@ -70,13 +84,25 @@ function CharacterFilterMenu({
             placeholder="filter by gender..."
           />
         </div>
-        <button className="p-2 border">apply filter</button>
+        <button type="submit" className="p-2 border">
+          apply filters
+        </button>
+        <button
+          type="button"
+          className="p-2 border"
+          onClick={handleFilterReset}
+        >
+          clear filters
+        </button>
+        <div>
+          <p>{`timer is ${isTimeoutActive ? "active" : "inactive"}`}</p>
+        </div>
       </form>
     </div>
   );
 }
 
-export enum CharacterFilterActionTypes {
+enum CharacterFilterActionTypes {
   SET_NAME_FILTER = "set_name_filter",
   SET_STATUS_FILTER = "set_status_filter",
   SET_SPECIES_FILTER = "set_species_filter",

@@ -14,8 +14,8 @@ const FALLBACK_PROP_TEXT = "unknown";
 function CharacterCard({ character }: { character: CharacterCardFragment }) {
   return (
     <Link href={`/characters/${character.id}`}>
-      <a>
-        <article className="hover:shadow-xl transition-shadow ease-in-out flex flex-col justify-between m-2 bg-slate-100 shadow overflow-hidden h-[24rem] w-60">
+      <a className="m-2">
+        <article className="hover:shadow-xl transition-shadow ease-in-out flex flex-col justify-between bg-slate-100 shadow overflow-hidden h-[24rem] w-60">
           <div className="w-full h-56 relative">
             <Image
               src={character.image || fallbackImage}
@@ -41,7 +41,7 @@ function CharacterCard({ character }: { character: CharacterCardFragment }) {
                 character.gender || FALLBACK_PROP_TEXT
               }`}</p>
             </div>
-            <div className="flex items-center h-12 p-1 gap-2 text-sm text-slate-900 tracking-wide">
+            <div className="flex items-center h-12 p-1 gap-2 text-sm text-slate-700 tracking-wide">
               <div className="border-r-2 pr-2">
                 <LocationMarkerIcon className="w-6 h-6 text-slate-400" />
               </div>
