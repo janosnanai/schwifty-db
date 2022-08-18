@@ -15,10 +15,11 @@ function CharacterFilterMenu({
     startTimeout,
     stopTimeout,
     isActive: isTimeoutActive,
-  } = useTimeout(() => onSearch(filterInput), 500);
+  } = useTimeout(() => onSearch(filterInput), 300);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    stopTimeout();
     onSearch(filterInput);
   }
 
@@ -40,9 +41,9 @@ function CharacterFilterMenu({
   }
 
   return (
-    <div className="px-9 py-5 space-y-3 text-slate-600">
+    <div className="px-9 py-5 space-y-3 text-slate-600 fixed z-10 bg-slate-50 w-72">
       <form onSubmit={handleSubmit}>
-        <div className="space-x-1">
+        <div className="flex flex-col gap-2">
           <input
             onChange={handleInputChange(
               CharacterFilterActionTypes.SET_NAME_FILTER
@@ -84,9 +85,6 @@ function CharacterFilterMenu({
             placeholder="filter by gender..."
           />
         </div>
-        <button type="submit" className="p-2 border">
-          apply filters
-        </button>
         <button
           type="button"
           className="p-2 border"

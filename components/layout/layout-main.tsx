@@ -5,7 +5,7 @@ import Navbar from "./navbar";
 function LayoutMain({ children }: { children: ReactNode | ReactNode[] }) {
   return (
     <>
-      <header className="bg-slate-50">
+      <header>
         <Navbar />
       </header>
       <main>{children}</main>
