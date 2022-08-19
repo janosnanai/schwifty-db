@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useState } from "react";
 import { Switch } from "@headlessui/react";
+import { useTheme } from "next-themes";
 
 function Navbar() {
   return (
@@ -46,22 +46,40 @@ function Navbar() {
 
 import { MoonIcon, SunIcon } from "@heroicons/react/outline";
 
+enum Themes {
+  DARK = "dark",
+  LIGHT = "light",
+}
+
 function DarkToggle() {
-  const [enabled, setEnabled] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  function handleToggle() {
+    switch (resolvedTheme) {
+      case Themes.DARK:
+        setTheme(Themes.LIGHT);
+        break;
+      case Themes.LIGHT:
+        setTheme(Themes.DARK);
+        break;
+      default:
+        return;
+    }
+  }
 
   return (
     <Switch
-      checked={enabled}
-      onChange={setEnabled}
+      checked={resolvedTheme === Themes.DARK}
+      onChange={handleToggle}
       className={`${
-        enabled ? "bg-slate-700" : "bg-slate-500"
+        theme === Themes.DARK ? "bg-slate-700" : "bg-slate-500"
       } relative inline-flex h-[28px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
     >
       <MoonIcon className="absolute left-0.5 h-6 w-6 text-emerald-300" />
       <SunIcon className="absolute right-0.5 h-6 w-6 text-emerald-300" />
       <span
         className={`${
-          enabled ? "translate-x-8" : "translate-x-0"
+          theme === Themes.DARK ? "translate-x-8" : "translate-x-0"
         } pointer-events-none inline-block h-6 w-6 transform rounded-full bg-slate-200 shadow-md ring-0 transition duration-200 ease-in-out`}
       />
     </Switch>
