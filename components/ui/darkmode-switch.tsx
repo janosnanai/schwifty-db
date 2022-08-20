@@ -33,14 +33,14 @@ function DarkModeSwitch() {
       checked={resolvedTheme === Themes.DARK}
       onChange={handleToggle}
       className={`${
-        theme === Themes.DARK ? "bg-slate-700" : "bg-slate-500"
+        resolvedTheme === Themes.DARK ? "bg-slate-700" : "bg-slate-500"
       } relative inline-flex h-[28px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
     >
       <MoonIcon className="absolute left-0.5 h-6 w-6 text-emerald-300" />
       <SunIcon className="absolute right-0.5 h-6 w-6 text-emerald-300" />
       <span
         className={`${
-          theme === Themes.DARK ? "translate-x-8" : "translate-x-0"
+          resolvedTheme === Themes.DARK ? "translate-x-8" : "translate-x-0"
         } pointer-events-none inline-block h-6 w-6 transform rounded-full bg-slate-200 shadow-md ring-0 transition duration-200 ease-in-out`}
       />
     </Switch>
