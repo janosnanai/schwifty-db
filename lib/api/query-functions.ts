@@ -10,9 +10,11 @@ import {
   GetOneCharacterDocument,
 } from "../../graphql/_generated";
 
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
+
 export const getManyCharactersQueryFn = async (pageParam = 1, filter = {}) => {
   const data = await request({
-    url: "https://rickandmortyapi.com/graphql",
+    url: API_ENDPOINT,
     document: GetManyCharactersDocument,
     variables: { filter, page: pageParam },
   });
@@ -21,7 +23,7 @@ export const getManyCharactersQueryFn = async (pageParam = 1, filter = {}) => {
 
 export const getOneCharacterQueryFn = async (id: string) => {
   const data = await request({
-    url: "https://rickandmortyapi.com/graphql",
+    url: API_ENDPOINT,
     document: GetOneCharacterDocument,
     variables: { id },
   });
