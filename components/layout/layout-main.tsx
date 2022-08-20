@@ -5,7 +5,7 @@ import Navbar from "./navbar";
 function LayoutMain({ children }: { children: ReactNode | ReactNode[] }) {
   return (
     <>
-      <header>
+      <header className="sticky top-0 z-10">
         <Navbar />
       </header>
       <main>{children}</main>

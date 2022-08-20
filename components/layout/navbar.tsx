@@ -2,45 +2,45 @@ import Link from "next/link";
 import { Switch } from "@headlessui/react";
 import { useTheme } from "next-themes";
 
+import { useIsMounted } from "../../lib/hooks";
+
 function Navbar() {
   return (
-    <div className="relative w-full h-16">
-      <nav className="px-12 py-3 fixed w-full h-16 bg-slate-200 bg-opacity-90 z-10">
-        <div className="flex justify-between items-center">
-          <div className="flex gap-7">
-            <div>
-              <Link href="/">
-                <a className="font-bold text-3xl text-slate-800">schwiftyDB</a>
-              </Link>
-            </div>
-            <div className="flex text-xl text-slate-600">
-              <Link href="/characters">
-                <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
-                  characters
-                </a>
-              </Link>
-              <Link href="/locations">
-                <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
-                  locations
-                </a>
-              </Link>
-              <Link href="/episodes">
-                <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
-                  episodes
-                </a>
-              </Link>
-              <div className="my-1 mx-1 w-0.5 bg-slate-300"></div>
-              <Link href={"/about"}>
-                <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
-                  about
-                </a>
-              </Link>
-            </div>
+    <nav className="px-12 py-3 w-full h-16 bg-slate-200 bg-opacity-90">
+      <div className="flex justify-between items-center">
+        <div className="flex gap-7">
+          <div>
+            <Link href="/">
+              <a className="font-bold text-3xl text-slate-800">schwiftyDB</a>
+            </Link>
           </div>
-          <DarkToggle />
+          <div className="flex text-xl text-slate-600">
+            <Link href="/characters">
+              <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
+                characters
+              </a>
+            </Link>
+            <Link href="/locations">
+              <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
+                locations
+              </a>
+            </Link>
+            <Link href="/episodes">
+              <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
+                episodes
+              </a>
+            </Link>
+            <div className="my-1 mx-1 w-0.5 bg-slate-300"></div>
+            <Link href={"/about"}>
+              <a className="hover:text-slate-900 hover:bg-white hover:bg-opacity-75 px-2 py-0.5 transition rounded-xl">
+                about
+              </a>
+            </Link>
+          </div>
         </div>
-      </nav>
-    </div>
+        <DarkToggle />
+      </div>
+    </nav>
   );
 }
 
@@ -53,6 +53,7 @@ enum Themes {
 
 function DarkToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const isMounted = useIsMounted();
 
   function handleToggle() {
     switch (resolvedTheme) {
@@ -66,6 +67,8 @@ function DarkToggle() {
         return;
     }
   }
+
+  if (!isMounted) return null;
 
   return (
     <Switch

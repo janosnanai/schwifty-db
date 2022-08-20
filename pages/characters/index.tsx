@@ -8,7 +8,7 @@ import { PulseLoader } from "react-spinners";
 import CharacterCardList from "../../components/card/character-card-list";
 import CharacterFilterMenu from "../../components/filter-menu/character-filter-menu";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
-import { useInfiniteScroll } from "../../hooks";
+import { useInfiniteScroll } from "../../lib/hooks";
 
 const CharactersPage: NextPage = () => {
   const [filter, setFilter] = useState<FilterCharacter>({});

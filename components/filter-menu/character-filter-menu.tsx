@@ -3,7 +3,7 @@ import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useReducer } from "react";
 
-import { useTimeout } from "../../hooks";
+import { useTimeout } from "../../lib/hooks";
 
 function CharacterFilterMenu({
   onSearch,
