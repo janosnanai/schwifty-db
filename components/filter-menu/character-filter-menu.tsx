@@ -1,26 +1,36 @@
-import type { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import type { FilterCharacter } from "../../graphql/_generated";
 
-import { useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
+import { useAtom } from "jotai";
 
 import { useTimeout } from "../../lib/hooks";
+import { charactersFilterAtom } from "../../lib/atoms";
 
-function CharacterFilterMenu({
-  onSearch,
-}: {
-  onSearch: Dispatch<SetStateAction<FilterCharacter>>;
-}) {
+function CharacterFilterMenu() {
+  const firstRenderRef = useRef(true);
+
+  const [charactersFilter, setCharactersFilter] = useAtom(charactersFilterAtom);
   const [filterInput, dispatch] = useReducer(filterReducer, initialFilter);
   const {
     startTimeout,
     stopTimeout,
     isActive: isTimeoutActive,
-  } = useTimeout(() => onSearch(filterInput), 300);
+  } = useTimeout(() => setCharactersFilter(filterInput), 300);
+
+  useEffect(() => {
+    if (!firstRenderRef.current) return;
+    dispatch({
+      type: CharacterFilterActionTypes.SYNC_FILTER,
+      payload: charactersFilter,
+    });
+    firstRenderRef.current = false;
+  }, [charactersFilter, dispatch]);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     stopTimeout();
-    onSearch(filterInput);
+    setCharactersFilter(filterInput);
   }
 
   function handleInputChange(type: CharacterFilterActionType) {
@@ -41,7 +51,7 @@ function CharacterFilterMenu({
   }
 
   return (
-    <div className="px-9 py-5 space-y-3 text-slate-600 fixed z-10 bg-slate-50 w-72">
+    <div className="px-9 py-5 space-y-3 text-slate-600 bg-slate-50 w-72">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
           <input
@@ -107,6 +117,7 @@ enum CharacterFilterActionTypes {
   SET_TYPE_FILTER = "set_type_filter",
   SET_GENDER_FILTER = "set_gender_filter",
   RESET_FILTER = "reset_filter",
+  SYNC_FILTER = "sync_filter",
 }
 
 const initialFilter: FilterCharacter = {
@@ -131,6 +142,8 @@ function filterReducer(state: FilterCharacter, action: CharacterFilterAction) {
       return { ...state, gender: action.payload };
     case CharacterFilterActionTypes.RESET_FILTER:
       return initialFilter;
+    case CharacterFilterActionTypes.SYNC_FILTER:
+      return { ...action.payload };
     default:
       return state;
   }

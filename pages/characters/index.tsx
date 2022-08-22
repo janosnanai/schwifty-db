@@ -1,23 +1,25 @@
 import type { NextPage } from "next";
-import type { FilterCharacter } from "../../graphql/_generated";
 
-import { useState } from "react";
+import { useAtom } from "jotai";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 
 import CharacterCardList from "../../components/card/character-card-list";
 import CharacterFilterMenu from "../../components/filter-menu/character-filter-menu";
+import FilterPopover from "../../components/ui/filter-popover";
+import { charactersFilterAtom } from "../../lib/atoms";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll } from "../../lib/hooks";
 
 const CharactersPage: NextPage = () => {
-  const [filter, setFilter] = useState<FilterCharacter>({});
+  const [charactersFilter, _setCharactersFilter] =
+    useAtom(charactersFilterAtom);
 
   const { isLoading, isFetching, isError, hasNextPage, data, fetchNextPage } =
     useInfiniteQuery(
-      ["characters", filter],
+      ["characters", charactersFilter],
       ({ pageParam }) => {
-        return getManyCharactersQueryFn(pageParam, filter);
+        return getManyCharactersQueryFn(pageParam, charactersFilter);
       },
       {
         getNextPageParam: (lastPage, _pages) => lastPage.characters?.info?.next,
@@ -31,8 +33,10 @@ const CharactersPage: NextPage = () => {
 
   return (
     <>
-      <CharacterFilterMenu onSearch={setFilter} />
-      <div className="pl-72">
+      <FilterPopover className="fixed bottom-10 right-10 z-10">
+        <CharacterFilterMenu />
+      </FilterPopover>
+      <div className="px-36">
         <CharacterCardList pages={data?.pages} />
         <div className="mx-auto my-3 text-center" ref={sentryRef}>
           <PulseLoader

@@ -1,5 +1,4 @@
-type CharacterFilterActionType =
-  typeof CharacterFilterActionTypes[keyof typeof CharacterFilterActionTypes];
+type CharacterFilterActionType = string;
 
 type CharacterFilterAction =
   | {
@@ -25,4 +24,8 @@ type CharacterFilterAction =
   | {
       type: CharacterFilterActionTypes.RESET_FILTER;
       payload?: InputMaybe<string>;
+    }
+  | {
+      type: CharacterFilterActionTypes.SYNC_FILTER;
+      payload?: InputMaybe<{}>;
     };
