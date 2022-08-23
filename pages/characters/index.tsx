@@ -13,7 +13,7 @@ import {
   charactersFilterActiveAtom,
 } from "../../lib/atoms";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
-import { useInfiniteScroll } from "../../lib/hooks";
+import { useInfiniteScroll, useIntersectionObserver } from "../../lib/hooks";
 
 const CharactersPage: NextPage = () => {
   const [charactersFilter, _setCharactersFilter] =
@@ -37,15 +37,19 @@ const CharactersPage: NextPage = () => {
     hasNextPage
   );
 
+  const { observedRef: pageTopRef, isVisible: isTopVisible } =
+    useIntersectionObserver();
+
   return (
     <>
-      <ToTopButton className="fixed bottom-24 right-10" />
+      {!isTopVisible && <ToTopButton className="fixed bottom-24 right-10" />}
       <FilterPopover
         className="fixed bottom-10 right-10 z-10"
         active={filterIsActive}
       >
         <CharacterFilterMenu />
       </FilterPopover>
+      <h1 ref={pageTopRef} id="page-top">page top</h1>
       <div className="px-36">
         <CharacterCardList pages={data?.pages} />
         <div className="mx-auto my-3 text-center" ref={sentryRef}>
