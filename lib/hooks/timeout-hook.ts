@@ -1,7 +1,7 @@
 /*
- * simple timeout hook
- * give it a callback and a delay (in ms)
- * returns start- and stop timeout functions and an "isActive" observable
+ * Simple timeout hook.
+ * Give it a callback and a delay (in ms)!
+ * Returns start- and stop timeout functions and an "isActive" observable.
  */
 
 import type { MutableRefObject } from "react";

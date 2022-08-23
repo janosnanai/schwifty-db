@@ -10,7 +10,7 @@ enum Themes {
 }
 
 function DarkModeSwitch() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const isMounted = useIsMounted();
 
   function handleToggle() {
