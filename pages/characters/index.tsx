@@ -7,13 +7,19 @@ import { PulseLoader } from "react-spinners";
 import CharacterCardList from "../../components/card/character-card-list";
 import CharacterFilterMenu from "../../components/filter-menu/character-filter-menu";
 import FilterPopover from "../../components/ui/filter-popover";
-import { charactersFilterAtom } from "../../lib/atoms";
+import ToTopButton from "../../components/ui/to-top-button";
+import {
+  charactersFilterAtom,
+  charactersFilterActiveAtom,
+} from "../../lib/atoms";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll } from "../../lib/hooks";
 
 const CharactersPage: NextPage = () => {
   const [charactersFilter, _setCharactersFilter] =
     useAtom(charactersFilterAtom);
+
+  const [filterIsActive] = useAtom(charactersFilterActiveAtom);
 
   const { isLoading, isFetching, isError, hasNextPage, data, fetchNextPage } =
     useInfiniteQuery(
@@ -33,7 +39,11 @@ const CharactersPage: NextPage = () => {
 
   return (
     <>
-      <FilterPopover className="fixed bottom-10 right-10 z-10">
+      <ToTopButton className="fixed bottom-24 right-10" />
+      <FilterPopover
+        className="fixed bottom-10 right-10 z-10"
+        active={filterIsActive}
+      >
         <CharacterFilterMenu />
       </FilterPopover>
       <div className="px-36">

@@ -1,1 +1,1 @@
-export * from "./filter-atoms";
+export * from "./characters-filter-atoms";

@@ -1,6 +1,6 @@
-type CharacterFilterActionType = string;
+type CharactersFilterActionType = string;
 
-type CharacterFilterAction =
+type CharactersFilterAction =
   | {
       type: CharacterFilterActionTypes.SET_NAME_FILTER;
       payload?: InputMaybe<string>;
