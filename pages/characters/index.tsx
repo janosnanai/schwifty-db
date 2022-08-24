@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 
 import CharacterCardList from "../../components/card/character-card-list";
-import CharacterFilterMenu from "../../components/filter-menu/character-filter-menu";
+import CharactersFilterMenu from "../../components/filter-menu/characters-filter-menu";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
 import {
@@ -47,9 +47,11 @@ const CharactersPage: NextPage = () => {
         className="fixed bottom-10 right-10 z-10"
         active={filterIsActive}
       >
-        <CharacterFilterMenu />
+        <CharactersFilterMenu />
       </FilterPopover>
-      <h1 ref={pageTopRef} id="page-top">page top</h1>
+      <h1 ref={pageTopRef} id="page-top">
+        page top
+      </h1>
       <div className="px-36">
         <CharacterCardList pages={data?.pages} />
         <div className="mx-auto my-3 text-center" ref={sentryRef}>
