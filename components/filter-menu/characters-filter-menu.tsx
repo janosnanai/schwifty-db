@@ -22,9 +22,8 @@ function CharactersFilterMenu() {
     useAtom(charactersFilterAtom);
   const [filterIsActive] = useAtom(charactersFilterActiveAtom);
   const [filterInput, dispatch] = useAtom(charactersFilterInputReducerAtom);
-  const { startTimeout, stopTimeout } = useTimeout(
-    () => setCharactersFilter(filterInput),
-    300
+  const { startTimeout, stopTimeout } = useTimeout(() =>
+    setCharactersFilter(filterInput)
   );
 
   function handleSubmit(event: FormEvent) {

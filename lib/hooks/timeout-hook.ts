@@ -8,7 +8,7 @@ import type { MutableRefObject } from "react";
 
 import { useEffect, useRef, useState } from "react";
 
-export function useTimeout(callback: Function, delay: number) {
+export function useTimeout(callback: Function, delay: number = 300) {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const callbackRef: MutableRefObject<Function> = useRef(callback);
 
