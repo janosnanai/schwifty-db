@@ -3,7 +3,7 @@ import type { FilterCharacter } from "../../graphql/_generated";
 import { atom } from "jotai";
 import { atomWithReducer } from "jotai/utils";
 
-import shallowCompare from "../shallow-compare";
+import { shallowCompare } from "../helpers";
 
 export enum CharactersFilterActionTypes {
   SET_NAME_FILTER = "set_name_filter",
@@ -51,6 +51,10 @@ export const charactersFilterInputReducerAtom = atomWithReducer(
   charactersFilterInputReducer
 );
 
-export const charactersFilterActiveAtom = atom((get) =>
-  !shallowCompare(get(charactersFilterInputReducerAtom), initialCharactersFilter)
+export const charactersFilterActiveAtom = atom(
+  (get) =>
+    !shallowCompare(
+      get(charactersFilterInputReducerAtom),
+      initialCharactersFilter
+    )
 );

@@ -19,7 +19,7 @@ function FilterPopover({
           <Popover.Button className="realtive h-11 w-11 rounded-full bg-purple-500  hover:bg-purple-400">
             {active && <span className="absolute top-0.5 right-0 inline-block w-2.5 h-2.5 rounded-full bg-amber-500 border border-amber-400"></span>}
             <FilterIcon
-              className={`w-6 h-6 mx-auto mt-1.5 ${
+              className={`w-6 h-6 mx-auto mt-1 ${
                 open ? "text-emerald-300" : "text-slate-800"
               }`}
             />
