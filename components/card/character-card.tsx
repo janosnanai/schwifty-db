@@ -27,6 +27,11 @@ function CharacterCard({ character }: { character: CharacterCardFragment }) {
               <h2 className="text-purple-800 dark:text-purple-500 text-2xl font-bold tracking-tight">
                 {character.name}
               </h2>
+              {character.type && (
+                <p className="mb-1 text-sm text-slate-600 dark:text-slate-500">
+                  {character.type}
+                </p>
+              )}
               <div className="flex gap-1.5 items-center">
                 <span
                   className={`${

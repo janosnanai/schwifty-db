@@ -1,6 +1,7 @@
 fragment CharacterCard on Character {
   id
   name
+  type
   status
   species
   gender
