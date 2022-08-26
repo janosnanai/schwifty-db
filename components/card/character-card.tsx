@@ -28,7 +28,7 @@ function CharacterCard({ character }: { character: CharacterCardFragment }) {
                 {character.name}
               </h2>
               {character.type && (
-                <p className="mb-1 text-sm text-slate-600 dark:text-slate-500">
+                <p className="mb-1 text-sm truncate text-slate-600 dark:text-slate-500">
                   {character.type}
                 </p>
               )}
