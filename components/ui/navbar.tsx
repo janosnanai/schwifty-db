@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import DarkModeSwitch from "../ui/darkmode-switch";
+import DarkModeSwitch from "./darkmode-switch";
 
 function Navbar() {
   return (

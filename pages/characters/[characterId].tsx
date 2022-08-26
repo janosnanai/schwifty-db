@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 
+import LayoutMain from "../../components/layout/layout-main";
 import { getOneCharacterQueryFn } from "../../lib/api/query-functions";
 
 const CharacterPage: NextPage = () => {
@@ -16,7 +17,7 @@ const CharacterPage: NextPage = () => {
   );
 
   return (
-    <>
+    <LayoutMain>
       <h1 className="text-2xl">{`single character page for character # ${characterId}`}</h1>
       {data && data.character && (
         <div>
@@ -39,7 +40,7 @@ const CharacterPage: NextPage = () => {
           </p>
         </div>
       )}
-    </>
+    </LayoutMain>
   );
 };
 

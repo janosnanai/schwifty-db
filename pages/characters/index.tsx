@@ -8,6 +8,7 @@ import CharacterCardList from "../../components/card/character-card-list";
 import CharactersFilterForm from "../../components/filter-form/characters-filter-form";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
+import LayoutQuery from "../../components/layout/layout-query";
 import {
   charactersFilterGetterAtom,
   charactersFilterActiveAtom,
@@ -40,7 +41,7 @@ const CharactersPage: NextPage = () => {
     useIntersectionObserver();
 
   return (
-    <>
+    <LayoutQuery>
       {!isTopVisible && <ToTopButton className="fixed bottom-24 right-10" />}
       <FilterPopover
         className="fixed bottom-10 right-10 z-10"
@@ -62,7 +63,7 @@ const CharactersPage: NextPage = () => {
           {!hasNextPage && !(isLoading || isFetching) && <p>end of results</p>}
         </div>
       </div>
-    </>
+    </LayoutQuery>
   );
 };
 
