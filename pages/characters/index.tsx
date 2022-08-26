@@ -5,19 +5,18 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 
 import CharacterCardList from "../../components/card/character-card-list";
-import CharactersFilterMenu from "../../components/filter-menu/characters-filter-menu";
+import CharactersFilterForm from "../../components/filter-form/characters-filter-form";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
 import {
-  charactersFilterAtom,
+  charactersFilterGetterAtom,
   charactersFilterActiveAtom,
 } from "../../lib/atoms";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll, useIntersectionObserver } from "../../lib/hooks";
 
 const CharactersPage: NextPage = () => {
-  const [charactersFilter, _setCharactersFilter] =
-    useAtom(charactersFilterAtom);
+  const [charactersFilter] = useAtom(charactersFilterGetterAtom);
 
   const [filterIsActive] = useAtom(charactersFilterActiveAtom);
 
@@ -47,7 +46,7 @@ const CharactersPage: NextPage = () => {
         className="fixed bottom-10 right-10 z-10"
         active={filterIsActive}
       >
-        <CharactersFilterMenu />
+        <CharactersFilterForm />
       </FilterPopover>
       <h1 ref={pageTopRef} id="page-top">
         page top

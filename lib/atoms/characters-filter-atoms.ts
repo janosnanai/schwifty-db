@@ -1,17 +1,15 @@
 import type { FilterCharacter } from "../../graphql/_generated";
 
 import { atom } from "jotai";
-import { atomWithReducer } from "jotai/utils";
 
 import { shallowCompare } from "../helpers";
 
 export enum CharactersFilterActionTypes {
-  SET_NAME_FILTER = "set_name_filter",
-  SET_STATUS_FILTER = "set_status_filter",
-  SET_SPECIES_FILTER = "set_species_filter",
-  SET_TYPE_FILTER = "set_type_filter",
-  SET_GENDER_FILTER = "set_gender_filter",
-  RESET_FILTER = "reset_filter",
+  SET_NAME_FILTER,
+  SET_STATUS_FILTER,
+  SET_SPECIES_FILTER,
+  SET_GENDER_FILTER,
+  RESET_FILTER,
 }
 
 const initialCharactersFilter: FilterCharacter = {
@@ -22,39 +20,85 @@ const initialCharactersFilter: FilterCharacter = {
   gender: "",
 };
 
-function charactersFilterInputReducer(
-  prev: FilterCharacter,
-  action: CharactersFilterAction
-) {
-  switch (action.type) {
-    case CharactersFilterActionTypes.SET_NAME_FILTER:
-      return { ...prev, name: action.payload };
-    case CharactersFilterActionTypes.SET_STATUS_FILTER:
-      return { ...prev, status: action.payload };
-    case CharactersFilterActionTypes.SET_SPECIES_FILTER:
-      return { ...prev, species: action.payload };
-    case CharactersFilterActionTypes.SET_TYPE_FILTER:
-      return { ...prev, type: action.payload };
-    case CharactersFilterActionTypes.SET_GENDER_FILTER:
-      return { ...prev, gender: action.payload };
-    case CharactersFilterActionTypes.RESET_FILTER:
-      return initialCharactersFilter;
-    default:
-      throw new Error("unknown action type");
+// live filter atoms
+
+const charactersFilterBaseAtom = atom(initialCharactersFilter);
+
+export const charactersFilterSetterAtom = atom(null, (get, set) => {
+  const newFilter = get(charactersFilterInputGetterAtom);
+  set(charactersFilterBaseAtom, newFilter);
+});
+
+export const charactersFilterGetterAtom = atom((get) =>
+  get(charactersFilterBaseAtom)
+);
+
+// filter input atoms
+
+const charactersFilterInputBaseAtom = atom(initialCharactersFilter);
+
+const charactersFilterInputNameSetterAtom = atom(
+  null,
+  (_get, set, name?: string | null) => {
+    set(charactersFilterInputBaseAtom, (prev) => ({ ...prev, name }));
   }
-}
+);
 
-export const charactersFilterAtom = atom(initialCharactersFilter);
+const charactersFilterInputStatusSetterAtom = atom(
+  null,
+  (_get, set, status?: string | null) => {
+    set(charactersFilterInputBaseAtom, (prev) => ({ ...prev, status }));
+  }
+);
 
-export const charactersFilterInputReducerAtom = atomWithReducer(
-  initialCharactersFilter,
-  charactersFilterInputReducer
+const charactersFilterInputSpeciesSetterAtom = atom(
+  null,
+  (_get, set, species?: string | null) => {
+    set(charactersFilterInputBaseAtom, (prev) => ({ ...prev, species }));
+  }
+);
+
+const charactersFilterInputGenderSetterAtom = atom(
+  null,
+  (_get, set, gender?: string | null) => {
+    set(charactersFilterInputBaseAtom, (prev) => ({ ...prev, gender }));
+  }
+);
+
+const charactersFilterInputResetAtom = atom(null, (_get, set) =>
+  set(charactersFilterInputBaseAtom, initialCharactersFilter)
+);
+
+export const charactersFilterInputGetterAtom = atom((get) =>
+  get(charactersFilterInputBaseAtom)
+);
+
+export const charactersFilterInputDispatchAtom = atom(
+  null,
+  (_get, set, action: CharactersFilterAction) => {
+    switch (action.type) {
+      case CharactersFilterActionTypes.SET_NAME_FILTER:
+        set(charactersFilterInputNameSetterAtom, action.payload);
+        break;
+      case CharactersFilterActionTypes.SET_SPECIES_FILTER:
+        set(charactersFilterInputSpeciesSetterAtom, action.payload);
+        break;
+      case CharactersFilterActionTypes.SET_STATUS_FILTER:
+        set(charactersFilterInputStatusSetterAtom, action.payload);
+        break;
+      case CharactersFilterActionTypes.SET_GENDER_FILTER:
+        set(charactersFilterInputGenderSetterAtom, action.payload);
+        break;
+      case CharactersFilterActionTypes.RESET_FILTER:
+        set(charactersFilterInputResetAtom);
+        break;
+      default:
+        throw new Error("unknown action type");
+    }
+  }
 );
 
 export const charactersFilterActiveAtom = atom(
   (get) =>
-    !shallowCompare(
-      get(charactersFilterInputReducerAtom),
-      initialCharactersFilter
-    )
+    !shallowCompare(get(charactersFilterInputBaseAtom), initialCharactersFilter)
 );
