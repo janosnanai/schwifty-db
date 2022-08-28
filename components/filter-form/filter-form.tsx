@@ -26,28 +26,22 @@ function FilterFormRoot({
   }
 
   return (
-    <div className="rounded-lg bg-white/75 dark:bg-black/75 border dark:border-zinc-700 backdrop-blur w-64 shadow overflow-hidden">
-      <div className="flex justify-between px-6 py-3 bg-gradient-to-tr from-purple-600/50 to-transparent mb-2">
-        <h2 className="text-2xl text-zinc-800 dark:text-zinc-300">Filters</h2>
-
-        <button
-          type="button"
-          disabled={!filterIsActive}
-          className="relative h-9 w-11 rounded bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900"
-          onClick={() => {
-            onReset();
-          }}
-        >
-          <FunnelIcon className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 mr-[1px] w-6 h-6" />
-          <XMarkIcon className="absolute bottom-1 right-1.5 w-4 h-4" />
-        </button>
-      </div>
-
-      <div className="mx-6 mb-24">
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-2">{children}</div>
-        </form>
-      </div>
+    <div className="px-6 py-3 rounded-lg bg-white/75 dark:bg-black/75 border-2 border-purple-500/75 backdrop-blur w-64 shadow">
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-2">{children}</div>
+      </form>
+      <button
+        type="button"
+        disabled={!filterIsActive}
+        className="relative h-8 w-full mt-5 rounded-lg bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900"
+        onClick={() => {
+          onReset();
+        }}
+      >
+        <FunnelIcon className="absolute bottom-1/2 left-2 translate-y-1/2 mr-[1px] w-5 h-5" />
+        <XMarkIcon className="absolute bottom-0.5 left-5 w-3 h-3" />
+        clear filters
+      </button>
     </div>
   );
 }
