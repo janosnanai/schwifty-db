@@ -42,7 +42,7 @@ const CharactersPage: NextPage = () => {
 
   return (
     <LayoutQuery>
-      {!isTopVisible && <ToTopButton className="fixed bottom-24 right-10" />}
+      <ToTopButton className="fixed bottom-24 right-10" show={!isTopVisible} />
       <FilterPopover
         className="fixed bottom-10 right-10 z-10"
         active={filterIsActive}

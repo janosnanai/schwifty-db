@@ -7,7 +7,7 @@ specifiers:
   '@graphql-codegen/typescript-operations': ^2.5.3
   '@graphql-typed-document-node/core': ^3.1.1
   '@headlessui/react': ^1.6.6
-  '@heroicons/react': ^1.0.6
+  '@heroicons/react': ^2.0.8
   '@tanstack/react-query': ^4.2.1
   '@tanstack/react-query-devtools': ^4.2.1
   '@testing-library/react': ^13.3.0
@@ -33,7 +33,7 @@ specifiers:
 
 dependencies:
   '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
-  '@heroicons/react': 1.0.6_react@18.2.0
+  '@heroicons/react': 2.0.8_react@18.2.0
   '@tanstack/react-query': 4.2.1_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.2.1_32b63s5o6uo6n4n6pi5xgs6jfq
   graphql: 16.6.0
@@ -1160,8 +1160,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@heroicons/react/1.0.6_react@18.2.0:
-    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
+  /@heroicons/react/2.0.8_react@18.2.0:
+    resolution: {integrity: sha512-nJNOMjXQH0Ngk6Y7QllYBH5VLB3+HMJyGBVQPZYUXGalYmN9kgEcVIxMjOiVjwuzee0GvZzmMRB0VQRJPHe8eg==}
     peerDependencies:
       react: '>= 16'
     dependencies:

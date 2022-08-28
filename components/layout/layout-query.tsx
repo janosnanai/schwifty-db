@@ -6,7 +6,7 @@ function LayoutQuery({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="bg-zinc-50 dark:bg-zinc-900">{children}</main>
     </>
   );
 }

@@ -1,6 +1,6 @@
 /**
  * Hook using intersection-observer API.
- * Returns a ref object, to be observedand a boolean observable whether the ref is in-view.
+ * Returns a ref object, to be observed and a boolean observable whether the ref is in-view.
  */
 
 // polyfill
