@@ -66,10 +66,7 @@ function CharacterCard({
               <div className="border-r-2 border-zinc-300 dark:border-zinc-700 pr-2">
                 <MapPinIcon className="w-6 h-6 text-purple-400" />
               </div>
-              <p>
-                {(character.location && character.location.name) ||
-                  FALLBACK_PROP_TEXT}
-              </p>
+              <p>{character.location?.name || FALLBACK_PROP_TEXT}</p>
             </div>
           </div>
         </article>
