@@ -33,7 +33,7 @@ function FilterFormRoot({
       <button
         type="button"
         disabled={!filterIsActive}
-        className="relative h-8 w-full mt-5 rounded-lg bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900"
+        className="relative h-8 w-full mt-9 rounded-lg bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900 font-semibold disabled:text-slate-800"
         onClick={() => {
           onReset();
         }}
@@ -95,9 +95,9 @@ function Select({
         onChange(value);
       }}
     >
-      <Listbox.Label className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
       <div className="relative">
-        <Listbox.Button className="relative text-left w-full cursor-default p-2 py-1 pr-10 rounded-lg bg-zinc-900 border border-zinc-700">
+        <Listbox.Label className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
+        <Listbox.Button className="relative text-left w-full cursor-default px-2 py-1 pr-10 rounded-lg bg-zinc-900 border border-zinc-700">
           <span
             className={`block truncate text-zinc-500 ${
               value && "text-zinc-300"
