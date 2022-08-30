@@ -1,3 +1,4 @@
+import type { RefObject } from "react";
 import type { CharacterCardFragment } from "../../graphql/_generated";
 
 import Image from "next/image";
@@ -8,10 +9,19 @@ import fallbackImage from "../../public/images/ram-fallback.jpeg";
 
 const FALLBACK_PROP_TEXT = "unknown";
 
-function CharacterCard({ character }: { character: CharacterCardFragment }) {
+function CharacterCard({
+  character,
+  cardRef = null,
+}: {
+  character: CharacterCardFragment;
+  cardRef?: RefObject<any> | null;
+}) {
   return (
     <Link href={`/characters/${character.id}`}>
-      <a className="group m-1.5 border-0 rounded-lg shadow shadow-emerald-400/50 border-emerald-400 hover:shadow-lg hover:m-1 hover:border-2 hover:shadow-emerald-400/30 transition ease-out overflow-hidden">
+      <a
+        ref={cardRef}
+        className="group m-1.5 border-0 rounded-lg shadow shadow-emerald-400/50 border-emerald-400 hover:shadow-lg hover:m-1 hover:border-2 hover:shadow-emerald-400/30 transition ease-out overflow-hidden"
+      >
         <article className="flex flex-col justify-between bg-zinc-100 group-hover:bg-zinc-50 dark:bg-zinc-900 dark:group-hover:bg-zinc-800 h-[24rem] transition ease-out w-60">
           <div className="w-full h-56 relative">
             <Image

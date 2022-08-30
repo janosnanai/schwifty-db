@@ -32,13 +32,13 @@ const CharactersPage: NextPage = () => {
       }
     );
 
-  const sentryRef = useInfiniteScroll(
+  const bottomRef = useInfiniteScroll(
     () => fetchNextPage({ cancelRefetch: false }),
     hasNextPage
   );
 
-  const { observedRef: pageTopRef, isVisible: isTopVisible } =
-    useIntersectionObserver();
+  const { observedRef: topRef, isVisible: isTopVisible } =
+    useIntersectionObserver(isFetching);
 
   return (
     <LayoutQuery>
@@ -49,12 +49,14 @@ const CharactersPage: NextPage = () => {
       >
         <CharactersFilterForm />
       </FilterPopover>
-      <h1 ref={pageTopRef} id="page-top">
-        page top
-      </h1>
+      <h1>characters page</h1>
       <div className="px-36">
-        <CharacterCardList pages={data?.pages} />
-        <div className="mx-auto my-3 text-center" ref={sentryRef}>
+        <CharacterCardList
+          pages={data?.pages}
+          topRef={topRef}
+          bottomRef={bottomRef}
+        />
+        <div className="mx-auto my-3 text-center">
           <PulseLoader
             size={15}
             speedMultiplier={1.2}

@@ -1,5 +1,6 @@
 /**
  * Hook using intersection-observer API.
+ * Optional wait for ie a fetch to finish
  * Returns a ref object, to be observed and a boolean observable whether the ref is in-view.
  */
 
@@ -11,11 +12,12 @@ import type { RefObject } from "react";
 
 import { useEffect, useRef, useState } from "react";
 
-export function useIntersectionObserver() {
+export function useIntersectionObserver(wait: boolean = false) {
   const [isVisible, setIsVisible] = useState(false);
   const observedRef: RefObject<any> = useRef();
 
   useEffect(() => {
+    if (wait) return;
     if (!observedRef.current) return;
     const observer = new IntersectionObserver((entries) => {
       switch (entries[0].isIntersecting) {
@@ -31,7 +33,7 @@ export function useIntersectionObserver() {
     return () => {
       observer.disconnect();
     };
-  }, [observedRef]);
+  }, [observedRef, wait]);
 
   return { observedRef, isVisible };
 }

@@ -5,9 +5,11 @@ import { ChevronDoubleUpIcon } from "@heroicons/react/24/outline";
 function ToTopButton({
   className,
   show = true,
+  topId = "page-top",
 }: {
   className?: string;
   show?: boolean;
+  topId?: string;
 }) {
   return (
     <Transition
@@ -20,7 +22,7 @@ function ToTopButton({
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <a href="#page-top">
+      <a href={`#${topId}`}>
         <div
           className={`w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-400 ${className}`}
         >

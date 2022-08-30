@@ -17,12 +17,10 @@ export function useInfiniteScroll(fetchNext: Function, hasNextPage?: boolean) {
   const callbackRef: MutableRefObject<Function> = useRef(fetchNext);
 
   useEffect(() => {
-    if (callbackRef.current === fetchNext) return;
-    callbackRef.current = fetchNext;
-  }, [fetchNext]);
+    if (!sentryRef.current) return;
+    if (!hasNextPage) return;
+    if (callbackRef.current !== fetchNext) callbackRef.current = fetchNext;
 
-  useEffect(() => {
-    if (!sentryRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver((entries) => {
       if (!entries[0].isIntersecting) return;
       callbackRef.current();
@@ -31,7 +29,7 @@ export function useInfiniteScroll(fetchNext: Function, hasNextPage?: boolean) {
     return () => {
       observer.disconnect();
     };
-  }, [sentryRef, hasNextPage]);
+  }, [sentryRef, fetchNext, hasNextPage]);
 
   return sentryRef;
 }
