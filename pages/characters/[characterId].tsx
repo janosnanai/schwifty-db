@@ -4,8 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 
-import LayoutMain from "../../components/layout/layout-main";
+import LayoutQuery from "../../components/layout/layout-query";
 import { getOneCharacterQueryFn } from "../../lib/api/query-functions";
+
+import fallbackImage from "../../public/images/ram-fallback.jpeg";
+
+const FALLBACK_PROP_TEXT = "unknown";
 
 const CharacterPage: NextPage = () => {
   const router = useRouter();
@@ -16,17 +20,20 @@ const CharacterPage: NextPage = () => {
     () => getOneCharacterQueryFn(characterId as string)
   );
 
+  if (!data?.character) return null;
+
   return (
-    <LayoutMain>
-      <h1 className="text-2xl">{`single character page for character # ${characterId}`}</h1>
-      {data && data.character && (
-        <div>
+    <LayoutQuery>
+      <div className="p-9 flex flex-wrap justify-center">
+        <div className="m-1.5 h-[300px] w-[300px] rounded-lg overflow-hidden">
           <Image
-            src={data.character.image!}
-            alt={data.character.name!}
+            src={data.character.image || fallbackImage}
+            alt={data.character.name || FALLBACK_PROP_TEXT}
             width={300}
             height={300}
           />
+        </div>
+        <div className="bg-zinc-800 m-1.5 h-[300px] w-[300px] rounded-lg overflow-hidden">
           <ul className="m-5">
             <li>name: {data.character.name}</li>
             <li>species: {data.character.species}</li>
@@ -34,13 +41,15 @@ const CharacterPage: NextPage = () => {
             <li>origin: {data.character.origin?.name}</li>
             <li>location: {data.character.location?.name}</li>
           </ul>
+        </div>
+        <div className="bg-zinc-800 m-1.5 h-[300px] w-[300px] rounded-lg overflow-hidden">
           <p>
             <span className="">episodes: </span>
             <span>{data.character.episode.length}</span>
           </p>
         </div>
-      )}
-    </LayoutMain>
+      </div>
+    </LayoutQuery>
   );
 };
 

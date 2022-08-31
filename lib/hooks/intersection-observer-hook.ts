@@ -8,34 +8,23 @@
 // @ts-ignore
 import "intersection-observer";
 
-import type { RefObject } from "react";
-
 import { useEffect, useRef, useState } from "react";
 
-export function useIntersectionObserver(wait: boolean = false) {
-  const [isVisible, setIsVisible] = useState(true);
-  const observedRef: RefObject<any> = useRef();
+export function useIntersectionObserver(
+  observerConfig = { threshold: 0, root: null, rootMargin: "0%" }
+) {
+  const [isVisible, setIsVisible] = useState(false);
+  const observedRef = useRef<Element>();
 
   useEffect(() => {
-    if (!observedRef.current || wait) {
-      setIsVisible(true);
-      return;
-    }
+    const node = observedRef.current;
+    if (!node) return;
     const observer = new IntersectionObserver((entries) => {
-      switch (entries[0].isIntersecting) {
-        case true:
-          setIsVisible(true);
-          break;
-        case false:
-          setIsVisible(false);
-          break;
-      }
+      setIsVisible(entries[0].isIntersecting);
     });
-    observer.observe(observedRef.current);
-    return () => {
-      observer.disconnect();
-    };
-  }, [observedRef, wait]);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [observedRef, observerConfig]);
 
   return { observedRef, isVisible };
 }

@@ -38,7 +38,7 @@ const LocationsPage: NextPage = () => {
   );
 
   const { observedRef: topRef, isVisible: isTopVisible } =
-    useIntersectionObserver(isFetching && !data);
+    useIntersectionObserver();
 
   return (
     <LayoutQuery>

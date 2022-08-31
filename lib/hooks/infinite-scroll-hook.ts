@@ -8,13 +8,15 @@
 // @ts-ignore
 import "intersection-observer";
 
-import type { RefObject, MutableRefObject } from "react";
-
 import { useEffect, useRef } from "react";
 
-export function useInfiniteScroll(fetchNext: Function, hasNextPage?: boolean) {
-  const sentryRef: RefObject<any> = useRef();
-  const callbackRef: MutableRefObject<Function> = useRef(fetchNext);
+export function useInfiniteScroll(
+  fetchNext: () => void,
+  hasNextPage?: boolean,
+  observerConfig = { threshold: 0, root: null, rootMargin: "0%" }
+) {
+  const sentryRef = useRef<Element>();
+  const callbackRef = useRef(fetchNext);
 
   useEffect(() => {
     if (!sentryRef.current) return;
@@ -29,7 +31,7 @@ export function useInfiniteScroll(fetchNext: Function, hasNextPage?: boolean) {
     return () => {
       observer.disconnect();
     };
-  }, [sentryRef, fetchNext, hasNextPage]);
+  }, [sentryRef, observerConfig, fetchNext, hasNextPage]);
 
   return sentryRef;
 }
