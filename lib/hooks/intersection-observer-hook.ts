@@ -13,12 +13,14 @@ import type { RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 
 export function useIntersectionObserver(wait: boolean = false) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const observedRef: RefObject<any> = useRef();
 
   useEffect(() => {
-    if (wait) return;
-    if (!observedRef.current) return;
+    if (!observedRef.current || wait) {
+      setIsVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver((entries) => {
       switch (entries[0].isIntersecting) {
         case true:
