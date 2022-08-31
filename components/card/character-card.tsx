@@ -1,4 +1,4 @@
-import type { RefObject } from "react";
+import type { MutableRefObject } from "react";
 import type { CharacterCardFragment } from "../../graphql/_generated";
 
 import Image from "next/image";
@@ -14,7 +14,7 @@ function CharacterCard({
   cardRef = null,
 }: {
   character: CharacterCardFragment;
-  cardRef?: RefObject<any> | null;
+  cardRef?: MutableRefObject<HTMLAnchorElement> | null;
 }) {
   return (
     <Link href={`/characters/${character.id}`}>
@@ -22,7 +22,7 @@ function CharacterCard({
         ref={cardRef}
         className="group m-1.5 border-0 rounded-lg shadow shadow-emerald-400/50 border-emerald-400 hover:shadow-lg hover:m-1 hover:border-2 hover:shadow-emerald-400/30 transition ease-out overflow-hidden"
       >
-        <article className="flex flex-col justify-between bg-zinc-100 group-hover:bg-zinc-50 dark:bg-zinc-900 dark:group-hover:bg-zinc-800 h-[24rem] transition ease-out w-60">
+        <article className="flex flex-col justify-between bg-zinc-100 dark:bg-zinc-800 h-[24rem] transition ease-out w-60">
           <div className="w-full h-56 relative">
             <Image
               src={character.image || fallbackImage}
