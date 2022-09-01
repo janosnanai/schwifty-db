@@ -13,12 +13,16 @@ import { useEffect, useRef, useState } from "react";
 export function useIntersectionObserver(
   observerConfig = { threshold: 0, root: null, rootMargin: "0%" }
 ) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const observedRef = useRef<Element>();
 
   useEffect(() => {
     const node = observedRef.current;
-    if (!node) return;
+    if (!node) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
       setIsVisible(entries[0].isIntersecting);
     });
