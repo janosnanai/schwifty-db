@@ -9,3 +9,4 @@ export const CHARACTER_GENDER_OPTIONS = [
   { name: "genderless", value: "genderless" },
   { name: "unknown", value: "unknown" },
 ];
+export const FALLBACK_PROP_TEXT = "unknown";
