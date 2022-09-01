@@ -50,7 +50,7 @@ const CharactersPage: NextPage = () => {
         <CharactersFilterForm />
       </FilterPopover>
       <h1>characters page</h1>
-      <div className="px-36">
+      <div className="sm:px-36">
         <CharacterCardList
           pages={data?.pages}
           topRef={topRef}

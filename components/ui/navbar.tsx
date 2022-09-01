@@ -16,23 +16,23 @@ function Navbar() {
           </div>
           <div className="flex text-xl text-zinc-500">
             <Link href="/characters">
-              <a className="hover:text-zinc-800 hover:dark:text-zinc-400 px-2 py-0.5 transition">
+              <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-2 py-0.5 transition">
                 characters
               </a>
             </Link>
             <Link href="/locations">
-              <a className="hover:text-zinc-800 hover:dark:text-zinc-400 px-2 py-0.5 transition">
+              <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-2 py-0.5 transition">
                 locations
               </a>
             </Link>
             <Link href="/episodes">
-              <a className="hover:text-zinc-800 hover:dark:text-zinc-400 px-2 py-0.5 transition">
+              <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-2 py-0.5 transition">
                 episodes
               </a>
             </Link>
             <div className="my-1 mx-1 w-0.5 bg-zinc-300 dark:bg-zinc-600"></div>
             <Link href={"/about"}>
-              <a className="hover:text-zinc-800 hover:dark:text-zinc-400 px-2 py-0.5 transition">
+              <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-2 py-0.5 transition">
                 about
               </a>
             </Link>
