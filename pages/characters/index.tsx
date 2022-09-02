@@ -50,7 +50,13 @@ const CharactersPage: NextPage = () => {
         className="fixed bottom-6 md:bottom-10 right-3 md:right-10 z-10"
         active={filterIsActive}
       >
-        <CharactersFilterForm />
+        <CharactersFilterForm
+          allResults={data?.pages[0].characters?.info?.count || 0}
+          loadedResults={Math.min(
+            (data?.pages.length || 0) * 20,
+            data?.pages[0].characters?.info?.count || 0
+          )}
+        />
       </FilterPopover>
       <h1>characters page</h1>
       <div className="mx-14 md:mx-24 xl:mx-40">

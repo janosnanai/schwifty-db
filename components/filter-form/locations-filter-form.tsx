@@ -10,7 +10,13 @@ import {
   LocationsFilterActionTypes,
 } from "../../lib/atoms";
 
-function LocationsFilterForm() {
+function LocationsFilterForm({
+  allResults,
+  loadedResults,
+}: {
+  allResults?: number;
+  loadedResults?: number;
+}) {
   const [, setLocationsFilter] = useAtom(locationsFilterSetterAtom);
   const [locationsFilterIsActive] = useAtom(locationsFilterActiveAtom);
   const [locationsFilterInput] = useAtom(locationsFilterInputGetterAtom);
@@ -43,6 +49,8 @@ function LocationsFilterForm() {
       setFilter={() => null}
       onReset={handleFilterReset}
       filterIsActive={locationsFilterIsActive}
+      allResults={allResults}
+      loadedResults={loadedResults}
     >
       <FilterForm.Input
         name="name"

@@ -13,11 +13,15 @@ function FilterFormRoot({
   setFilter,
   onReset,
   filterIsActive = false,
+  allResults = 0,
+  loadedResults = 0,
   children,
 }: {
   setFilter: () => void;
   onReset: () => void;
   filterIsActive: boolean;
+  allResults?: number;
+  loadedResults?: number;
   children: JSX.Element | JSX.Element[];
 }) {
   function handleSubmit(event: FormEvent) {
@@ -27,6 +31,7 @@ function FilterFormRoot({
 
   return (
     <div className="px-6 py-3 rounded-lg bg-white/75 dark:bg-black/75 border-2 border-purple-500/75 backdrop-blur w-64 shadow">
+      <p className="text-sm text-emerald-500">{`${allResults} results / ${loadedResults} loaded`}</p>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">{children}</div>
       </form>
@@ -68,7 +73,7 @@ function Input({
         onChange={(event) => {
           onChange(event.target.value);
         }}
-        className="px-2 py-1 rounded-lg bg-zinc-900 w-full text-zinc-300 placeholder:text-zinc-500 border border-zinc-700"
+        className="px-2 py-1 rounded-lg bg-zinc-300 dark:bg-zinc-900 w-full text-zinc-800 dark:text-zinc-300 font-semibold placeholder:font-normal placeholder:text-zinc-500 border border-zinc-500 dark:border-zinc-700"
         value={value || ""}
         placeholder={`enter ${name} filter...`}
       />
@@ -97,10 +102,10 @@ function Select({
     >
       <div className="relative">
         <Listbox.Label className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
-        <Listbox.Button className="relative text-left w-full cursor-default px-2 py-1 pr-10 rounded-lg bg-zinc-900 border border-zinc-700">
+        <Listbox.Button className="relative text-left w-full cursor-default px-2 py-1 pr-10 rounded-lg bg-zinc-300 dark:bg-zinc-900 border border-zinc-500 dark:border-zinc-700">
           <span
             className={`block truncate text-zinc-500 ${
-              value && "text-zinc-300"
+              value && "font-semibold text-zinc-800 dark:text-zinc-300"
             }`}
           >
             {value || `select ${name} filter...`}
@@ -118,11 +123,11 @@ function Select({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute top-0 w-full overflow-auto bg-zinc-900 cursor-default rounded-lg z-10 border border-zinc-700">
+          <Listbox.Options className="absolute top-6 w-full overflow-auto bg-zinc-300 dark:bg-zinc-900 cursor-default rounded-lg z-10 border border-zinc-500 dark:border-zinc-700">
             <Listbox.Option value={""} className="relative group">
               {({ selected }) => (
-                <div className="px-2 py-0.5 hover:bg-zinc-800">
-                  <span className="pr-7 text-zinc-300 group-hover:text-emerald-300">
+                <div className="px-2 py-0.5 hover:bg-zinc-500 dark:hover:bg-zinc-800">
+                  <span className="pr-7 text-zinc-800 dark:text-zinc-300 group-hover:text-emerald-300">
                     {"-"}
                   </span>
                   {selected && (
@@ -138,8 +143,8 @@ function Select({
                 className="relative group"
               >
                 {({ selected }) => (
-                  <div className="px-2 py-0.5 hover:bg-zinc-800">
-                    <span className="pr-7 text-zinc-300 group-hover:text-emerald-300">
+                  <div className="px-2 py-0.5 hover:bg-zinc-500 dark:hover:bg-zinc-800">
+                    <span className="pr-7 text-zinc-800 dark:text-zinc-300 group-hover:text-emerald-300">
                       {option.value}
                     </span>
                     {selected && (

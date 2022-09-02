@@ -50,7 +50,13 @@ const LocationsPage: NextPage = () => {
         className="fixed bottom-6 md:bottom-10 right-3 md:right-10 z-10"
         active={filterIsActive}
       >
-        <LocationFilterForm />
+        <LocationFilterForm
+          allResults={data?.pages[0].locations?.info?.count || 0}
+          loadedResults={Math.min(
+            (data?.pages.length || 0) * 20,
+            data?.pages[0].locations?.info?.count || 0
+          )}
+        />
       </FilterPopover>
       <h1>episodes page</h1>
       <div className="mx-14 md:mx-24 xl:mx-40">

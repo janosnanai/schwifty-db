@@ -14,7 +14,13 @@ import {
   CHARACTER_GENDER_OPTIONS,
 } from "../../lib/constants";
 
-function CharactersFilterForm() {
+function CharactersFilterForm({
+  allResults,
+  loadedResults,
+}: {
+  allResults?: number;
+  loadedResults?: number;
+}) {
   const [, setCharactersFilter] = useAtom(charactersFilterSetterAtom);
   const [charactersFilterIsActive] = useAtom(charactersFilterActiveAtom);
   const [charactersFilterInput] = useAtom(charactersFilterInputGetterAtom);
@@ -47,6 +53,8 @@ function CharactersFilterForm() {
       setFilter={() => null}
       onReset={handleFilterReset}
       filterIsActive={charactersFilterIsActive}
+      allResults={allResults}
+      loadedResults={loadedResults}
     >
       <FilterForm.Input
         name="name"

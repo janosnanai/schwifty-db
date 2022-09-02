@@ -10,7 +10,13 @@ import {
   EpisodesFilterActionTypes,
 } from "../../lib/atoms";
 
-function EpisodesFilterForm() {
+function EpisodesFilterForm({
+  allResults,
+  loadedResults,
+}: {
+  allResults?: number;
+  loadedResults?: number;
+}) {
   const [, setEpisodesFilter] = useAtom(episodesFilterSetterAtom);
   const [episodesFilterIsActive] = useAtom(episodesFilterActiveAtom);
   const [episodesFilterInput] = useAtom(episodesFilterInputGetterAtom);
@@ -43,6 +49,8 @@ function EpisodesFilterForm() {
       setFilter={() => null}
       onReset={handleFilterReset}
       filterIsActive={episodesFilterIsActive}
+      allResults={allResults}
+      loadedResults={loadedResults}
     >
       <FilterForm.Input
         name="name"
