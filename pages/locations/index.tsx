@@ -42,15 +42,18 @@ const LocationsPage: NextPage = () => {
 
   return (
     <LayoutQuery>
-      <ToTopButton className="fixed bottom-24 right-10" show={!isTopVisible} />
+      <ToTopButton
+        className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
+        show={!isTopVisible}
+      />
       <FilterPopover
-        className="fixed bottom-10 right-10 z-10"
+        className="fixed bottom-6 md:bottom-10 right-3 md:right-10 z-10"
         active={filterIsActive}
       >
         <LocationFilterForm />
       </FilterPopover>
       <h1>episodes page</h1>
-      <div className="px-36">
+      <div className="mx-14 md:mx-24 xl:mx-40">
         <LocationCardList
           pages={data?.pages}
           topRef={topRef}
