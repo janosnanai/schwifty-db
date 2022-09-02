@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 
+import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { PulseLoader } from "react-spinners";
 
 import EpisodeCardList from "../../components/card/episode-card-list";
 import EpisodesFilterForm from "../../components/filter-form/episodes-filter-form";
@@ -12,14 +12,15 @@ import LayoutQuery from "../../components/layout/layout-query";
 import {
   episodesFilterGetterAtom,
   episodesFilterActiveAtom,
+  loadingSpinnerSetterAtom,
 } from "../../lib/atoms";
 import { getManyEpisodesQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll, useIntersectionObserver } from "../../lib/hooks";
 
 const EpisodesPage: NextPage = () => {
   const [episodesFilter] = useAtom(episodesFilterGetterAtom);
-
   const [filterIsActive] = useAtom(episodesFilterActiveAtom);
+  const [, setIsLoading] = useAtom(loadingSpinnerSetterAtom);
 
   const { isLoading, isFetching, isError, hasNextPage, data, fetchNextPage } =
     useInfiniteQuery(
@@ -31,6 +32,10 @@ const EpisodesPage: NextPage = () => {
         getNextPageParam: (lastPage, _pages) => lastPage.episodes?.info?.next,
       }
     );
+
+  useEffect(() => {
+    setIsLoading(isLoading || isFetching);
+  }, [isLoading, isFetching, setIsLoading]);
 
   const bottomRef = useInfiniteScroll(
     () => fetchNextPage({ cancelRefetch: false }),
@@ -66,11 +71,6 @@ const EpisodesPage: NextPage = () => {
           bottomRef={bottomRef}
         />
         <div className="mx-auto my-3 text-center">
-          <PulseLoader
-            size={15}
-            speedMultiplier={1.2}
-            loading={isLoading || isFetching}
-          />
           {!hasNextPage && !(isLoading || isFetching) && <p>end of results</p>}
         </div>
       </div>

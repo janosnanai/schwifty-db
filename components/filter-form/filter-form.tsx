@@ -104,8 +104,10 @@ function Select({
         <Listbox.Label className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
         <Listbox.Button className="relative text-left w-full cursor-default px-2 py-1 pr-10 rounded-lg bg-zinc-300 dark:bg-zinc-900 border border-zinc-500 dark:border-zinc-700">
           <span
-            className={`block truncate text-zinc-500 ${
-              value && "font-semibold text-zinc-800 dark:text-zinc-300"
+            className={`block truncate ${
+              value
+                ? "font-semibold text-zinc-800 dark:text-zinc-300"
+                : "text-zinc-500"
             }`}
           >
             {value || `select ${name} filter...`}
