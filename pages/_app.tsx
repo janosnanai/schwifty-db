@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <div id="page-top"></div>
         <Component {...pageProps} />
-        <ReactQueryDevtools initialIsOpen={false} position="top-left" />
+        <ReactQueryDevtools initialIsOpen={false} position="top-right" />
       </QueryClientProvider>
     </ThemeProvider>
   );
