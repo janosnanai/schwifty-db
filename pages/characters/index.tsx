@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import type { GetManyCharactersQuery } from "../../graphql/_generated";
+import type { FilterCharacter } from "../../graphql/_generated";
 
 import { useEffect } from "react";
 import { useAtom } from "jotai";
@@ -6,6 +8,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import CharacterCardList from "../../components/card/character-card-list";
 import CharactersFilterForm from "../../components/filter-form/characters-filter-form";
+import ErrorBanner from "../../components/ui/error-banner";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
 import LayoutQuery from "../../components/layout/layout-query";
@@ -13,6 +16,8 @@ import {
   charactersFilterGetterAtom,
   charactersFilterActiveAtom,
   loadingSpinnerSetterAtom,
+  errorBannerMessageSetterAtom,
+  errorBannerShowSetterAtom,
 } from "../../lib/atoms";
 import { getManyCharactersQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll, useIntersectionObserver } from "../../lib/hooks";
@@ -21,17 +26,37 @@ const CharactersPage: NextPage = () => {
   const [charactersFilter] = useAtom(charactersFilterGetterAtom);
   const [filterIsActive] = useAtom(charactersFilterActiveAtom);
   const [, setIsLoading] = useAtom(loadingSpinnerSetterAtom);
+  const [, setErrorMessage] = useAtom(errorBannerMessageSetterAtom);
+  const [, setErrorShow] = useAtom(errorBannerShowSetterAtom);
 
-  const { isLoading, isFetching, isError, hasNextPage, data, fetchNextPage } =
-    useInfiniteQuery(
-      ["characters", charactersFilter],
-      ({ pageParam }) => {
-        return getManyCharactersQueryFn(pageParam, charactersFilter);
-      },
-      {
-        getNextPageParam: (lastPage, _pages) => lastPage.characters?.info?.next,
-      }
-    );
+  const {
+    isLoading,
+    isFetching,
+    isError,
+    hasNextPage,
+    data,
+    error,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery<
+    GetManyCharactersQuery,
+    Error | null,
+    GetManyCharactersQuery,
+    (string | FilterCharacter)[]
+  >(
+    ["characters", charactersFilter],
+    ({ pageParam }) => {
+      return getManyCharactersQueryFn(pageParam, charactersFilter);
+    },
+    {
+      getNextPageParam: (lastPage, _pages) => lastPage.characters?.info?.next,
+    }
+  );
+
+  useEffect(() => {
+    setErrorShow(isError);
+    setErrorMessage(error ? error.message : "");
+  }, [isError, error, setErrorShow, setErrorMessage]);
 
   useEffect(() => {
     setIsLoading(isLoading || isFetching);
@@ -47,6 +72,7 @@ const CharactersPage: NextPage = () => {
 
   return (
     <LayoutQuery>
+      <ErrorBanner refetch={refetch} />
       <ToTopButton
         className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
         show={!isTopVisible}

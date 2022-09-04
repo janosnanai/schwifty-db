@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import type { GetManyLocationsQuery } from "../../graphql/_generated";
+import type { FilterLocation } from "../../graphql/_generated";
 
 import { useEffect } from "react";
 import { useAtom } from "jotai";
@@ -6,6 +8,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import LocationCardList from "../../components/card/location-card-list";
 import LocationFilterForm from "../../components/filter-form/locations-filter-form";
+import ErrorBanner from "../../components/ui/error-banner";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
 import LayoutQuery from "../../components/layout/layout-query";
@@ -13,6 +16,8 @@ import {
   locationsFilterGetterAtom,
   locationsFilterActiveAtom,
   loadingSpinnerSetterAtom,
+  errorBannerMessageSetterAtom,
+  errorBannerShowSetterAtom,
 } from "../../lib/atoms";
 import { getManyLocationsQueryFn } from "../../lib/api/query-functions";
 import { useInfiniteScroll, useIntersectionObserver } from "../../lib/hooks";
@@ -21,17 +26,37 @@ const LocationsPage: NextPage = () => {
   const [locationsFilter] = useAtom(locationsFilterGetterAtom);
   const [filterIsActive] = useAtom(locationsFilterActiveAtom);
   const [, setIsLoading] = useAtom(loadingSpinnerSetterAtom);
+  const [, setErrorMessage] = useAtom(errorBannerMessageSetterAtom);
+  const [, setErrorShow] = useAtom(errorBannerShowSetterAtom);
 
-  const { isLoading, isFetching, isError, hasNextPage, data, fetchNextPage } =
-    useInfiniteQuery(
-      ["episodes", locationsFilter],
-      ({ pageParam }) => {
-        return getManyLocationsQueryFn(pageParam, locationsFilter);
-      },
-      {
-        getNextPageParam: (lastPage, _pages) => lastPage.locations?.info?.next,
-      }
-    );
+  const {
+    isLoading,
+    isFetching,
+    isError,
+    hasNextPage,
+    data,
+    error,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery<
+    GetManyLocationsQuery,
+    Error | null,
+    GetManyLocationsQuery,
+    (string | FilterLocation)[]
+  >(
+    ["episodes", locationsFilter],
+    ({ pageParam }) => {
+      return getManyLocationsQueryFn(pageParam, locationsFilter);
+    },
+    {
+      getNextPageParam: (lastPage, _pages) => lastPage.locations?.info?.next,
+    }
+  );
+
+  useEffect(() => {
+    setErrorShow(isError);
+    setErrorMessage(error ? error.message : "");
+  }, [isError, error, setErrorShow, setErrorMessage]);
 
   useEffect(() => {
     setIsLoading(isLoading || isFetching);
@@ -47,6 +72,7 @@ const LocationsPage: NextPage = () => {
 
   return (
     <LayoutQuery>
+      <ErrorBanner refetch={refetch} />
       <ToTopButton
         className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
         show={!isTopVisible}

@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <QueryClientProvider client={queryClient}>
         <div id="page-top"></div>
+        <div id="banner-root"></div>
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} position="top-right" />
       </QueryClientProvider>
