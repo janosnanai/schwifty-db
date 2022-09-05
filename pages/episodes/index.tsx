@@ -89,7 +89,9 @@ const EpisodesPage: NextPage = () => {
           )}
         />
       </FilterPopover>
-      <h1>episodes page</h1>
+      <h1 className="text-4xl text-center text-zinc-800 dark:text-zinc-100 mb-7 uppercase">
+        episodes
+      </h1>
       <div className="mx-14 md:mx-24 xl:mx-40">
         <EpisodeCardList
           pages={data?.pages}
@@ -97,7 +99,15 @@ const EpisodesPage: NextPage = () => {
           bottomRef={bottomRef}
         />
         <div className="mx-auto my-3 text-center">
-          {!hasNextPage && !(isLoading || isFetching) && <p>end of results</p>}
+          {hasNextPage && (isLoading || isFetching) && <p>loading more...</p>}
+          {!hasNextPage &&
+            !(isLoading || isFetching) &&
+            !!data?.pages[0].episodes?.results?.length && <p>end of results</p>}
+          {!hasNextPage &&
+            !(isLoading || isFetching) &&
+            !data?.pages[0].episodes?.results?.length && (
+              <p>no results found</p>
+            )}
         </div>
       </div>
     </LayoutQuery>

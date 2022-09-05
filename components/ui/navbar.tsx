@@ -37,7 +37,7 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="relative px-12 py-3 w-full h-20 bg-zinc-50/75 dark:bg-zinc-900/75 backdrop-blur">
+    <nav className="relative px-12 py-4 w-full h-20 bg-zinc-50/75 dark:bg-zinc-900/75 backdrop-blur">
       <div className="fixed top-4 left-1">
         <ScaleLoader
           loading={isLoading}
@@ -47,7 +47,7 @@ function Navbar() {
           width={3}
         />
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between h-10 items-center">
         <div className="flex gap-7 items-center">
           <div>
             <Link href="/">
@@ -57,7 +57,7 @@ function Navbar() {
             </Link>
           </div>
           {!hamburgerMode && (
-            <div className="flex text-xl text-zinc-500">
+            <div className="flex text-lg uppercase text-zinc-500">
               <Link href="/characters">
                 <a className="hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
                   characters

@@ -17,7 +17,7 @@ function FilterPopover({
     <Popover className={className}>
       {({ open }) => (
         <>
-          <Popover.Button className="relative h-11 w-11 rounded-full bg-purple-500  hover:bg-purple-400">
+          <Popover.Button className="relative h-11 w-11 rounded-full transition-colors bg-purple-500  hover:bg-purple-400">
             <Transition
               show={active}
               as={Fragment}

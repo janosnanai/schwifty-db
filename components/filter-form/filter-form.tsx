@@ -38,7 +38,7 @@ function FilterFormRoot({
       <button
         type="button"
         disabled={!filterIsActive}
-        className="relative h-8 w-full mt-9 rounded-lg bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900 font-semibold disabled:text-slate-800"
+        className="relative h-8 w-full mt-9 rounded-lg transition-colors bg-red-500 hover:enabled:bg-red-400 disabled:bg-slate-500 text-zinc-900 disabled:text-slate-800 uppercase"
         onClick={() => {
           onReset();
         }}
@@ -64,7 +64,7 @@ function Input({
     <div>
       <label
         htmlFor={name}
-        className="text-sm font-semibold text-zinc-600 dark:text-zinc-400"
+        className="text-xs font-semibold uppercase text-zinc-600 dark:text-zinc-400"
       >
         {`${name}:`}
       </label>
@@ -101,7 +101,7 @@ function Select({
       }}
     >
       <div className="relative">
-        <Listbox.Label className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
+        <Listbox.Label className="text-xs font-semibold uppercase text-zinc-600 dark:text-zinc-400">{`${name}:`}</Listbox.Label>
         <Listbox.Button className="relative text-left w-full cursor-default px-2 py-1 pr-10 rounded-lg bg-zinc-300 dark:bg-zinc-900 border border-zinc-500 dark:border-zinc-700">
           <span
             className={`block truncate ${
