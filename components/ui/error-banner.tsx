@@ -4,20 +4,24 @@ import { useAtom } from "jotai";
 import { Transition } from "@headlessui/react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
+import { useIsMounted } from "../../lib/hooks";
 import {
   errorBannerMessageGetterAtom,
   errorBannerShowGetterAtom,
   errorBannerShowSetterAtom,
 } from "../../lib/atoms";
 
-const bannerRoot = document?.getElementById("banner-root");
-
 function ErrorBanner({ refetch }: { refetch: () => void }) {
   const [show] = useAtom(errorBannerShowGetterAtom);
   const [message] = useAtom(errorBannerMessageGetterAtom);
   const [, setShow] = useAtom(errorBannerShowSetterAtom);
+  const isMounted = useIsMounted();
 
-  if (!bannerRoot) return null;
+  let bannerRoot: HTMLElement | null = null;
+
+  if (!isMounted) return null;
+
+  bannerRoot = document.getElementById("banner-root");
 
   return createPortal(
     <Transition
@@ -50,7 +54,7 @@ function ErrorBanner({ refetch }: { refetch: () => void }) {
         </div>
       </div>
     </Transition>,
-    bannerRoot
+    bannerRoot!
   );
 }
 
