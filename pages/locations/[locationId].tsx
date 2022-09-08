@@ -1,57 +1,80 @@
+import type { GetOneLocationQuery } from "../../graphql/_generated";
 import type { NextPage } from "next";
 
-import Link from "next/link";
+import { useEffect } from "react";
+import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 
+import CharactersList from "../../components/single-entity-page-components/characters-list";
+import ErrorBanner from "../../components/ui/error-banner";
 import LayoutQuery from "../../components/layout/layout-query";
 import { getOneLocationQueryFn } from "../../lib/api/query-functions";
-
-import { FALLBACK_PROP_TEXT } from "../../lib/constants";
+import {
+  errorBannerMessageSetterAtom,
+  errorBannerShowSetterAtom,
+  loadingSpinnerSetterAtom,
+} from "../../lib/atoms";
+import { SingleEntityDataList } from "../../components/single-entity-page-components/data-list";
 
 const LocationPage: NextPage = () => {
   const router = useRouter();
   const { locationId } = router.query;
 
-  const { isLoading, isError, data } = useQuery(["location", locationId], () =>
+  const { isLoading, isFetching, isError, data, error, refetch } = useQuery<
+    GetOneLocationQuery,
+    Error | null,
+    GetOneLocationQuery,
+    (string | string[] | undefined)[]
+  >(["location", locationId], () =>
     getOneLocationQueryFn(locationId as string)
   );
 
-  if (!data?.location) return null;
+  const [, setIsLoading] = useAtom(loadingSpinnerSetterAtom);
+  const [, setErrorMessage] = useAtom(errorBannerMessageSetterAtom);
+  const [, setErrorShow] = useAtom(errorBannerShowSetterAtom);
+
+  useEffect(() => {
+    setErrorShow(isError);
+    setErrorMessage(error ? error.message : "");
+  }, [isError, error, setErrorShow, setErrorMessage]);
+
+  useEffect(() => {
+    setIsLoading(isLoading || isFetching);
+  }, [isLoading, isFetching, setIsLoading]);
 
   return (
     <LayoutQuery>
-      <div className="p-9">
-        <h1 className="text-3xl text-center">{data.location.name}</h1>
-        <div className="flex flex-wrap justify-center">
-          <div className="bg-zinc-800 rounded-lg m-1.5 h-[300px] w-[300px] overflow-hidden">
-            <ul className="m-3 space-y-3">
-              <li>
-                <span>type:</span>
-                <span>{data.location.type || FALLBACK_PROP_TEXT}</span>
-              </li>
-              <li>
-                <span>dimension:</span>
-                <span>{data.location.dimension || FALLBACK_PROP_TEXT}</span>
-              </li>
-            </ul>
+      <>
+        <ErrorBanner refetch={refetch} />
+        <h1 className="text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
+          location
+        </h1>
+        {data?.location && (
+          <div className="flex items-center sm:items-start sm:justify-center gap-2 flex-col sm:flex-row">
+            <SingleEntityDataList label="overview">
+              <SingleEntityDataList.Item
+                label="name"
+                content={data.location.name}
+              />
+              <SingleEntityDataList.Item
+                label="type"
+                content={data.location.type}
+              />
+              <SingleEntityDataList.Item
+                label="dimension"
+                content={data.location.dimension}
+              />
+            </SingleEntityDataList>
+            <CharactersList
+              className="mb-9"
+              label="residents"
+              list={data.location.residents}
+              linkRoot="/characters/"
+            />
           </div>
-          <div className="bg-zinc-800 rounded-lg m-1.5 h-[300px] w-[300px] overflow-hidden flex flex-col justify-between">
-            <h3 className="">
-              {`residents(${data.location.residents.length}):`}
-            </h3>
-            <ul className="h-64 overflow-auto">
-              {data.location.residents.map((resident) => (
-                <li key={"e" + resident!.id}>
-                  <Link href={`/characters/${resident?.id}`}>
-                    <a>{resident?.name}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+        )}
+      </>
     </LayoutQuery>
   );
 };
