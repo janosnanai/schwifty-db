@@ -24,17 +24,17 @@ function LocationCard({
     >
       <article className="flex flex-col justify-between bg-zinc-100 dark:bg-zinc-800 h-48 w-60">
         <div className="flex flex-col justify-center h-1/2 w-full px-2 py-0 shadow-sm bg-zinc-300 group-hover:bg-zinc-200 dark:bg-black/50 dark:group-hover:bg-zinc-900/50 transition ease-out">
-          <h2 className="inline-block text-purple-800 dark:text-purple-500 text-2xl font-bold font-dosis tracking-normal leading-tight">
+          <h2 className="inline-block text-purple-800 dark:text-purple-500 text-2xl font-bold font-heading tracking-normal leading-tight">
             {location.name}
           </h2>
         </div>
-        <div className="flex items-center h-12 px-2 py-1 gap-2 font-domine text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
+        <div className="flex items-center h-12 px-2 py-1 gap-2 text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
           <div className="border-r-2 border-zinc-300 dark:border-zinc-700 pr-2">
             <InformationCircleIcon className="w-6 h-6 text-purple-400" />
           </div>
           <p>{location.type || FALLBACK_PROP_TEXT}</p>
         </div>
-        <div className="flex items-center h-12 px-2 py-1 gap-2 font-domine text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
+        <div className="flex items-center h-12 px-2 py-1 gap-2 text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
           <div className="border-r-2 border-zinc-300 dark:border-zinc-700 pr-2">
             <GlobeAltIcon className="w-6 h-6 text-purple-400" />
           </div>

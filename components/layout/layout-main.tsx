@@ -7,7 +7,7 @@ function LayoutMain({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      {children}
       <Footer />
     </>
   );

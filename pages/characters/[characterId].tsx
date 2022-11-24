@@ -51,7 +51,7 @@ const CharacterPage: NextPage = () => {
     <LayoutQuery>
       <>
         <ErrorBanner refetch={refetch} />
-        <h1 className="font-dosis text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
+        <h1 className="font-heading text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
           character
         </h1>
         {data?.character && (

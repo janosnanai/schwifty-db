@@ -1,3 +1,5 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -13,8 +15,8 @@ module.exports = {
         "mobile-sm": "280px",
       },
       fontFamily: {
-        dosis: ["Dosis", "sans-serif"],
-        domine: ["Domine", "serif"],
+        heading: ["var(--font-roboto)", ...fontFamily.sans],
+        sans: ["var(--font-nunito)", ...fontFamily.sans],
       },
     },
   },

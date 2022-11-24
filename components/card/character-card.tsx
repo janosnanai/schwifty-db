@@ -31,11 +31,11 @@ function CharacterCard({
             className="object-cover"
           />
           <div className="absolute -bottom-12 left-2 w-52 px-2 pt-1 pb-2 shadow-sm bg-zinc-50/75 group-hover:bg-white/75 dark:bg-black/75 dark:group-hover:bg-zinc-900/75 transition ease-out backdrop-blur rounded">
-            <h2 className="text-purple-800 dark:text-purple-500 font-dosis text-2xl font-bold tracking-normal leading-tight">
+            <h2 className="text-purple-800 dark:text-purple-500 font-heading text-2xl font-bold tracking-normal leading-tight">
               {character.name}
             </h2>
             {character.type && (
-              <p className="mb-1.5 mt-0.5 font-domine text-xs truncate text-zinc-600 dark:text-zinc-400">
+              <p className="mb-1.5 mt-0.5 font-text text-xs truncate text-zinc-600 dark:text-zinc-400">
                 {character.type}
               </p>
             )}
@@ -47,14 +47,14 @@ function CharacterCard({
                   character.status === "unknown" ? "bg-zinc-500" : ""
                 } h-3 w-3 rounded-full`}
               ></span>
-              <p className="font-domine text-sm text-zinc-900 dark:text-zinc-300 tracking-wide">
+              <p className="text-sm text-zinc-900 dark:text-zinc-300 tracking-wide">
                 {`${character.status || FALLBACK_PROP_TEXT}`}
               </p>
             </div>
           </div>
         </div>
         <div className="w-full p-2 flex flex-col gap-1">
-          <div className="flex items-center h-12 p-1 gap-2 font-domine text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
+          <div className="flex items-center h-12 p-1 gap-2 text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
             <div className="border-r-2 border-zinc-300 dark:border-zinc-700 pr-2">
               <InformationCircleIcon className="w-6 h-6 text-purple-400" />
             </div>
@@ -62,7 +62,7 @@ function CharacterCard({
               character.gender || FALLBACK_PROP_TEXT
             }`}</p>
           </div>
-          <div className="flex items-center h-12 p-1 gap-2 font-domine text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
+          <div className="flex items-center h-12 p-1 gap-2 text-sm text-zinc-700 dark:text-zinc-300 tracking-wide">
             <div className="border-r-2 border-zinc-300 dark:border-zinc-700 pr-2">
               <MapPinIcon className="w-6 h-6 text-purple-400" />
             </div>

@@ -6,7 +6,7 @@ function LayoutQuery({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      {children}
     </>
   );
 }

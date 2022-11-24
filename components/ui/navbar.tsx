@@ -52,7 +52,7 @@ function Navbar() {
           <div>
             <Link
               href="/"
-              className="font-bold font-dosis text-5xl text-zinc-800 dark:text-zinc-100"
+              className="font-bold font-heading text-5xl text-zinc-800 dark:text-zinc-100"
             >
               schwiftyDB
             </Link>
@@ -61,26 +61,26 @@ function Navbar() {
             <div className="flex text-lg uppercase text-zinc-500">
               <Link
                 href="/characters"
-                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
               >
                 characters
               </Link>
               <Link
                 href="/locations"
-                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
               >
                 locations
               </Link>
               <Link
                 href="/episodes"
-                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
               >
                 episodes
               </Link>
               <div className="my-1 mx-1 w-0.5 bg-zinc-300 dark:bg-zinc-600"></div>
               <Link
                 href="/about"
-                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
               >
                 about
               </Link>

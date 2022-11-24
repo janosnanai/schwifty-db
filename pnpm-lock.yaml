@@ -9,6 +9,7 @@ specifiers:
   '@graphql-typed-document-node/core': ^3.1.1
   '@headlessui/react': ^1.7.4
   '@heroicons/react': ^2.0.13
+  '@next/font': ^13.0.5
   '@tanstack/react-query': ^4.16.1
   '@tanstack/react-query-devtools': ^4.16.1
   '@testing-library/react': ^13.4.0
@@ -36,6 +37,7 @@ specifiers:
 dependencies:
   '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.13_react@18.2.0
+  '@next/font': 13.0.5
   '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.16.1_makdk7ivkz7rbnnozofqroz2qy
   graphql: 16.6.0
@@ -1358,6 +1360,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.0.5:
+    resolution: {integrity: sha512-NrP4B8pxwerrkkuG/m7MQv0ks89Kk4Lc0kzbiRaYX+Xb0coDaw+I9T+g42aOHf8j8ta1vtKqb5XE1+troZ4CoQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.0.5:
     resolution: {integrity: sha512-YO691dxHlviy6H0eghgwqn+5kU9J3iQnKERHTDSppqjjGDBl6ab4wz9XfI5AhljjkaTg3TknHoIEWFDoZ4Ve8g==}
