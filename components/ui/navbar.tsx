@@ -50,34 +50,39 @@ function Navbar() {
       <div className="flex justify-between h-10 items-center">
         <div className="flex gap-7 items-center">
           <div>
-            <Link href="/">
-              <a className="font-bold font-dosis text-5xl text-zinc-800 dark:text-zinc-100">
-                schwiftyDB
-              </a>
+            <Link
+              href="/"
+              className="font-bold font-dosis text-5xl text-zinc-800 dark:text-zinc-100"
+            >
+              schwiftyDB
             </Link>
           </div>
           {!hamburgerMode && (
             <div className="flex text-lg uppercase text-zinc-500">
-              <Link href="/characters">
-                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
-                  characters
-                </a>
+              <Link
+                href="/characters"
+                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+              >
+                characters
               </Link>
-              <Link href="/locations">
-                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
-                  locations
-                </a>
+              <Link
+                href="/locations"
+                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+              >
+                locations
               </Link>
-              <Link href="/episodes">
-                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
-                  episodes
-                </a>
+              <Link
+                href="/episodes"
+                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+              >
+                episodes
               </Link>
               <div className="my-1 mx-1 w-0.5 bg-zinc-300 dark:bg-zinc-600"></div>
-              <Link href={"/about"}>
-                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
-                  about
-                </a>
+              <Link
+                href="/about"
+                className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+              >
+                about
               </Link>
             </div>
           )}
