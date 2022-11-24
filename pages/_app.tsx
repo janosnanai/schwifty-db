@@ -10,6 +10,7 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    <>
     <ThemeProvider attribute="class">
       <QueryClientProvider client={queryClient}>
         <div id="page-top"></div>
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ReactQueryDevtools initialIsOpen={false} position="top-right" />
       </QueryClientProvider>
     </ThemeProvider>
+    </>
   );
 }
 

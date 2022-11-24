@@ -51,7 +51,7 @@ function Navbar() {
         <div className="flex gap-7 items-center">
           <div>
             <Link href="/">
-              <a className="font-bold text-3xl text-zinc-800 dark:text-zinc-100">
+              <a className="font-bold font-dosis text-5xl text-zinc-800 dark:text-zinc-100">
                 schwiftyDB
               </a>
             </Link>
@@ -59,23 +59,23 @@ function Navbar() {
           {!hamburgerMode && (
             <div className="flex text-lg uppercase text-zinc-500">
               <Link href="/characters">
-                <a className="hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
+                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
                   characters
                 </a>
               </Link>
               <Link href="/locations">
-                <a className="hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
+                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
                   locations
                 </a>
               </Link>
               <Link href="/episodes">
-                <a className="hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
+                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
                   episodes
                 </a>
               </Link>
               <div className="my-1 mx-1 w-0.5 bg-zinc-300 dark:bg-zinc-600"></div>
               <Link href={"/about"}>
-                <a className="hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
+                <a className="font-dosis text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition">
                   about
                 </a>
               </Link>

@@ -47,7 +47,7 @@ const LocationPage: NextPage = () => {
     <LayoutQuery>
       <>
         <ErrorBanner refetch={refetch} />
-        <h1 className="text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
+        <h1 className="font-dosis text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
           location
         </h1>
         {data?.location && (

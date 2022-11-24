@@ -6,7 +6,17 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "mobile-lg": "400px",
+        "mobile-md": "360px",
+        "mobile-sm": "280px",
+      },
+      fontFamily: {
+        dosis: ["Dosis", "sans-serif"],
+        domine: ["Domine", "serif"],
+      },
+    },
   },
   plugins: [],
 };

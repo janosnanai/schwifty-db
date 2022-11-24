@@ -22,10 +22,10 @@ function EpisodesList({
       }
     >
       <h2 className="bg-zinc-200 dark:bg-zinc-900/50 p-2 border-b border-purple-500">
-        <span className="uppercase text-zinc-900 dark:text-zinc-200">
+        <span className="font-dosis uppercase text-zinc-900 dark:text-zinc-200">
           {label}
         </span>
-        <span className="text-xs text-zinc-600 dark:text-zinc-400">{`(${
+        <span className="font-dosis text-xs text-zinc-600 dark:text-zinc-400">{`(${
           list?.length ?? 0
         })`}</span>
       </h2>
@@ -39,10 +39,10 @@ function EpisodesList({
                 <li key={"e" + item.id}>
                   <Link href={`${linkRoot}${item?.id}`}>
                     <a className="group inline-flex gap-2 w-full">
-                      <p className="text-emerald-800 dark:text-emerald-300 group-hover:underline underline-offset-2">
+                      <p className="font-domine text-emerald-800 dark:text-emerald-300 group-hover:underline underline-offset-2">
                         {item?.episode}
                       </p>
-                      <p className="text-emerald-600 dark:text-emerald-400 group-hover:underline underline-offset-2 truncate">
+                      <p className="font-domine text-emerald-600 dark:text-emerald-400 group-hover:underline underline-offset-2 truncate">
                         {item?.name}
                       </p>
                     </a>

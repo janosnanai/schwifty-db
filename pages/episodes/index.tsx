@@ -89,7 +89,7 @@ const EpisodesPage: NextPage = () => {
           )}
         />
       </FilterPopover>
-      <h1 className="text-4xl text-center text-zinc-800 dark:text-zinc-100 mb-7 uppercase">
+      <h1 className="font-dosis text-4xl text-center text-zinc-800 dark:text-zinc-100 mb-7 uppercase">
         episodes
       </h1>
       <div className="mx-14 md:mx-24 xl:mx-40">
