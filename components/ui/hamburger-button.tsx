@@ -42,26 +42,23 @@ function HamburgerButton() {
           >
             <Popover.Panel className="fixed right-0 top-0">
               <div className="w-40 p-5 pt-24 flex flex-col text-xl text-zinc-500 bg-zinc-50 dark:bg-zinc-900">
-                <Link href="/characters">
-                  <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition">
-                    characters
-                  </a>
+                <Link
+                  href="/characters"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                >
+                  characters
                 </Link>
-                <Link href="/locations">
-                  <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition">
-                    locations
-                  </a>
+                <Link
+                  href="/locations"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                >
+                  locations
                 </Link>
-                <Link href="/episodes">
-                  <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition">
-                    episodes
-                  </a>
-                </Link>
-                <div className="my-3 mx-3 h-0.5 w-24 bg-zinc-300 dark:bg-zinc-700"></div>
-                <Link href={"/about"}>
-                  <a className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition">
-                    about
-                  </a>
+                <Link
+                  href="/episodes"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                >
+                  episodes
                 </Link>
                 <div className="mt-9 mx-auto">
                   <DarkModeSwitch />

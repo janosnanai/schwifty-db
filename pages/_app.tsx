@@ -31,7 +31,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <main className={`${roboto.variable} ${nunito.variable} font-sans`}>
             <Component {...pageProps} />
           </main>
-          <ReactQueryDevtools initialIsOpen={false} position="top-right" />
+          {process.env.NODE_ENV !== "production" && (
+            <ReactQueryDevtools initialIsOpen={false} position="top-right" />
+          )}
         </QueryClientProvider>
       </ThemeProvider>
     </>
