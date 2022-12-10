@@ -10,14 +10,28 @@ const HomePage: NextPage = () => {
         <title>schwiftyDB - home</title>
         <meta
           name="description"
-          content="The Rick and Morty series database."
+          content="The unofficial Rick and Morty series database."
         />
       </Head>
       <LayoutMain>
-        <h1 className="font-heading text-2xl text-center">
-          Welcome to the Rick and Morty database!
-        </h1>
-        <p className="text-lg"></p>
+        <div className="container mx-auto mt-7">
+          <h1 className="font-heading text-5xl text-center text-zinc-800 dark:text-zinc-200">
+            Welcome to{" "}
+            <strong className="text-7xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-purple-500">
+              schwiftyDB
+            </strong>
+          </h1>
+          <h2 className="font-heading text-center mt-3 text-2xl text-zinc-700 dark:text-zinc-300">
+            The unofficial Rick and Morty database
+          </h2>
+          <p className="text-lg text-center mt-9">
+            Using{" "}
+            <a href="https://rickandmortyapi.com/" className="text-purple-500">
+              The Rick and Morty API
+            </a>{" "}
+            by Axel Fuhrmann.
+          </p>
+        </div>
       </LayoutMain>
     </>
   );
