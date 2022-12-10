@@ -77,7 +77,7 @@ const EpisodesPage: NextPage = () => {
         <title>schwiftyDB - episodes</title>
         <meta
           name="description"
-          content="Browse, search and filter between all Rick & Morty episodes."
+          content="Browse, search and filter between all Rick and Morty episodes."
         />
       </Head>
       <LayoutQuery>

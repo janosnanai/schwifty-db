@@ -77,7 +77,7 @@ const LocationsPage: NextPage = () => {
         <title>schwiftyDB - locations</title>
         <meta
           name="description"
-          content="Browse, search and filter between all Rick & Morty locations."
+          content="Browse, search and filter between all Rick and Morty locations."
         />
       </Head>
       <LayoutQuery>

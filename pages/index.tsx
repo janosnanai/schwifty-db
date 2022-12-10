@@ -8,7 +8,10 @@ const HomePage: NextPage = () => {
     <>
       <Head>
         <title>schwiftyDB - home</title>
-        <meta name="description" content="The Rick & Morty series database." />
+        <meta
+          name="description"
+          content="The Rick and Morty series database."
+        />
       </Head>
       <LayoutMain>
         <h1 className="font-heading text-2xl">
