@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import type { GetManyEpisodesQuery } from "../../graphql/_generated";
 import type { FilterEpisode } from "../../graphql/_generated";
 
+import Head from "next/head";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -71,46 +72,57 @@ const EpisodesPage: NextPage = () => {
     useIntersectionObserver();
 
   return (
-    <LayoutQuery>
-      <ErrorBanner refetch={refetch} />
-      <ToTopButton
-        className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
-        show={!isTopVisible}
-      />
-      <FilterPopover
-        className="fixed bottom-6 md:bottom-10 right-3 md:right-10 z-10"
-        active={filterIsActive}
-      >
-        <EpisodesFilterForm
-          allResults={data?.pages[0].episodes?.info?.count || 0}
-          loadedResults={Math.min(
-            (data?.pages.length || 0) * 20,
-            data?.pages[0].episodes?.info?.count || 0
-          )}
+    <>
+      <Head>
+        <title>schwiftyDB - episodes</title>
+        <meta
+          name="description"
+          content="Browse, search and filter between all Rick & Morty episodes."
         />
-      </FilterPopover>
-      <h1 className="font-heading text-4xl text-center text-zinc-800 dark:text-zinc-100 mb-7 uppercase">
-        episodes
-      </h1>
-      <div className="mx-14 md:mx-24 xl:mx-40">
-        <EpisodeCardList
-          pages={data?.pages}
-          topRef={topRef}
-          bottomRef={bottomRef}
+      </Head>
+      <LayoutQuery>
+        <ErrorBanner refetch={refetch} />
+        <ToTopButton
+          className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
+          show={!isTopVisible}
         />
-        <div className="mx-auto my-3 text-center">
-          {hasNextPage && (isLoading || isFetching) && <p>loading more...</p>}
-          {!hasNextPage &&
-            !(isLoading || isFetching) &&
-            !!data?.pages[0].episodes?.results?.length && <p>end of results</p>}
-          {!hasNextPage &&
-            !(isLoading || isFetching) &&
-            !data?.pages[0].episodes?.results?.length && (
-              <p>no results found</p>
+        <FilterPopover
+          className="fixed bottom-6 md:bottom-10 right-3 md:right-10 z-10"
+          active={filterIsActive}
+        >
+          <EpisodesFilterForm
+            allResults={data?.pages[0].episodes?.info?.count || 0}
+            loadedResults={Math.min(
+              (data?.pages.length || 0) * 20,
+              data?.pages[0].episodes?.info?.count || 0
             )}
+          />
+        </FilterPopover>
+        <h1 className="font-heading text-4xl text-center text-zinc-800 dark:text-zinc-100 mb-7 uppercase">
+          episodes
+        </h1>
+        <div className="mx-14 md:mx-24 xl:mx-40">
+          <EpisodeCardList
+            pages={data?.pages}
+            topRef={topRef}
+            bottomRef={bottomRef}
+          />
+          <div className="mx-auto my-3 text-center">
+            {hasNextPage && (isLoading || isFetching) && <p>loading more...</p>}
+            {!hasNextPage &&
+              !(isLoading || isFetching) &&
+              !!data?.pages[0].episodes?.results?.length && (
+                <p>end of results</p>
+              )}
+            {!hasNextPage &&
+              !(isLoading || isFetching) &&
+              !data?.pages[0].episodes?.results?.length && (
+                <p>no results found</p>
+              )}
+          </div>
         </div>
-      </div>
-    </LayoutQuery>
+      </LayoutQuery>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import type { GetOneEpisodeQuery } from "../../graphql/_generated";
 import type { NextPage } from "next";
 
+import Head from "next/head";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
@@ -42,38 +43,43 @@ const LocationPage: NextPage = () => {
   }, [isLoading, isFetching, setIsLoading]);
 
   return (
-    <LayoutQuery>
-      <>
-        <ErrorBanner refetch={refetch} />
-        <h1 className="font-heading text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
-          episode
-        </h1>
-        {data?.episode && (
-          <div className="flex items-center sm:items-start sm:justify-center gap-2 flex-col sm:flex-row">
-            <SingleEntityDataList label="overview">
-              <SingleEntityDataList.Item
-                label="episode"
-                content={data.episode.episode}
+    <>
+      <Head>
+        <title>schwiftyDB - episode {episodeId}</title>
+      </Head>
+      <LayoutQuery>
+        <>
+          <ErrorBanner refetch={refetch} />
+          <h1 className="font-heading text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
+            episode
+          </h1>
+          {data?.episode && (
+            <div className="flex items-center sm:items-start sm:justify-center gap-2 flex-col sm:flex-row">
+              <SingleEntityDataList label="overview">
+                <SingleEntityDataList.Item
+                  label="episode"
+                  content={data.episode.episode}
+                />
+                <SingleEntityDataList.Item
+                  label="title"
+                  content={data.episode.name}
+                />
+                <SingleEntityDataList.Item
+                  label="air date"
+                  content={data.episode.air_date}
+                />
+              </SingleEntityDataList>
+              <CharactersList
+                className="mb-9"
+                label="characters"
+                list={data.episode.characters}
+                linkRoot="/characters/"
               />
-              <SingleEntityDataList.Item
-                label="title"
-                content={data.episode.name}
-              />
-              <SingleEntityDataList.Item
-                label="air date"
-                content={data.episode.air_date}
-              />
-            </SingleEntityDataList>
-            <CharactersList
-              className="mb-9"
-              label="characters"
-              list={data.episode.characters}
-              linkRoot="/characters/"
-            />
-          </div>
-        )}
-      </>
-    </LayoutQuery>
+            </div>
+          )}
+        </>
+      </LayoutQuery>
+    </>
   );
 };
 
