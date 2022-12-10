@@ -77,13 +77,6 @@ function Navbar() {
               >
                 episodes
               </Link>
-              <div className="my-1 mx-1 w-0.5 bg-zinc-300 dark:bg-zinc-600"></div>
-              <Link
-                href="/about"
-                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
-              >
-                about
-              </Link>
             </div>
           )}
         </div>
