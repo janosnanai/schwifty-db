@@ -51,7 +51,9 @@ const CharacterPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>schwiftyDB - character {characterId}</title>
+        <title>
+          schwiftyDB - character: {data?.character?.name ?? characterId}
+        </title>
       </Head>
       <LayoutQuery>
         <>

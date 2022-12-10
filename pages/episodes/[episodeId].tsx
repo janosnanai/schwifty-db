@@ -45,7 +45,9 @@ const LocationPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>schwiftyDB - episode {episodeId}</title>
+        <title>
+          schwiftyDB - episode: {data?.episode?.episode ?? episodeId}
+        </title>
       </Head>
       <LayoutQuery>
         <>
