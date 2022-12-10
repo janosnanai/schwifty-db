@@ -12,7 +12,7 @@ import LocationFilterForm from "../../components/filter-form/locations-filter-fo
 import ErrorBanner from "../../components/ui/error-banner";
 import FilterPopover from "../../components/ui/filter-popover";
 import ToTopButton from "../../components/ui/to-top-button";
-import LayoutQuery from "../../components/layout/layout-query";
+import LayoutMain from "../../components/layout/layout-main";
 import {
   locationsFilterGetterAtom,
   locationsFilterActiveAtom,
@@ -80,7 +80,7 @@ const LocationsPage: NextPage = () => {
           content="Browse, search and filter between all Rick and Morty locations."
         />
       </Head>
-      <LayoutQuery>
+      <LayoutMain>
         <ErrorBanner refetch={refetch} />
         <ToTopButton
           className="fixed bottom-20 md:bottom-24 right-3 md:right-10 z-10"
@@ -121,7 +121,7 @@ const LocationsPage: NextPage = () => {
               )}
           </div>
         </div>
-      </LayoutQuery>
+      </LayoutMain>
     </>
   );
 };

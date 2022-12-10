@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import CharactersList from "../../components/single-entity-page-components/characters-list";
 import ErrorBanner from "../../components/ui/error-banner";
-import LayoutQuery from "../../components/layout/layout-query";
+import LayoutMain from "../../components/layout/layout-main";
 import { getOneEpisodeQueryFn } from "../../lib/api/query-functions";
 import {
   errorBannerMessageSetterAtom,
@@ -49,7 +49,7 @@ const LocationPage: NextPage = () => {
           schwiftyDB - episode: {data?.episode?.episode ?? episodeId}
         </title>
       </Head>
-      <LayoutQuery>
+      <LayoutMain>
         <>
           <ErrorBanner refetch={refetch} />
           <h1 className="font-heading text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
@@ -80,7 +80,7 @@ const LocationPage: NextPage = () => {
             </div>
           )}
         </>
-      </LayoutQuery>
+      </LayoutMain>
     </>
   );
 };

@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 import EpisodesList from "../../components/single-entity-page-components/episodes-list";
 import ErrorBanner from "../../components/ui/error-banner";
-import LayoutQuery from "../../components/layout/layout-query";
+import LayoutMain from "../../components/layout/layout-main";
 import { getOneCharacterQueryFn } from "../../lib/api/query-functions";
 import {
   errorBannerMessageSetterAtom,
@@ -55,7 +55,7 @@ const CharacterPage: NextPage = () => {
           schwiftyDB - character: {data?.character?.name ?? characterId}
         </title>
       </Head>
-      <LayoutQuery>
+      <LayoutMain>
         <>
           <ErrorBanner refetch={refetch} />
           <h1 className="font-heading text-4xl text-center text-zinc-700 dark:text-zinc-100 mb-7 uppercase">
@@ -123,7 +123,7 @@ const CharacterPage: NextPage = () => {
             </>
           )}
         </>
-      </LayoutQuery>
+      </LayoutMain>
     </>
   );
 };

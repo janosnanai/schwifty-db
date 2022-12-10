@@ -14,7 +14,7 @@ const HomePage: NextPage = () => {
         />
       </Head>
       <LayoutMain>
-        <h1 className="font-heading text-2xl">
+        <h1 className="font-heading text-2xl text-center">
           Welcome to the Rick and Morty database!
         </h1>
         <p className="text-lg"></p>
