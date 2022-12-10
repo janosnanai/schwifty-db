@@ -25,6 +25,13 @@ const HomePage: NextPage = () => {
             The unofficial Rick and Morty database
           </h2>
           <p className="text-lg text-center mt-9">
+            Made by{" "}
+            <a href="https://github.com/janosnanai" className="text-purple-500">
+              János Nánai
+            </a>
+            .
+          </p>
+          <p className="text-lg text-center">
             Using{" "}
             <a href="https://rickandmortyapi.com/" className="text-purple-500">
               The Rick and Morty API
