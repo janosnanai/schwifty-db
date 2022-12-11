@@ -41,22 +41,22 @@ function HamburgerButton() {
             leaveTo="opacity-0 -translate-y-20"
           >
             <Popover.Panel className="fixed right-0 top-0">
-              <div className="w-40 p-5 pt-24 flex flex-col text-xl text-zinc-500 bg-zinc-50 dark:bg-zinc-900">
+              <div className="w-40 p-5 pt-24 flex flex-col text-xl text-zinc-600 dark:text-zinc-400 bg-zinc-200 dark:bg-black">
                 <Link
                   href="/characters"
-                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-200 px-3 py-1 transition"
                 >
                   characters
                 </Link>
                 <Link
                   href="/locations"
-                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-200 px-3 py-1 transition"
                 >
                   locations
                 </Link>
                 <Link
                   href="/episodes"
-                  className="hover:text-zinc-800 hover:dark:text-zinc-300 px-3 py-1 transition"
+                  className="hover:text-zinc-800 hover:dark:text-zinc-200 px-3 py-1 transition"
                 >
                   episodes
                 </Link>

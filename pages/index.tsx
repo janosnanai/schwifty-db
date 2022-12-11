@@ -26,14 +26,20 @@ const HomePage: NextPage = () => {
           </h2>
           <p className="text-lg text-center mt-9">
             Made by{" "}
-            <a href="https://github.com/janosnanai" className="text-purple-500">
+            <a
+              href="https://github.com/janosnanai"
+              className="text-purple-700 dark:text-purple-400"
+            >
               János Nánai
             </a>
             .
           </p>
           <p className="text-lg text-center">
             Using{" "}
-            <a href="https://rickandmortyapi.com/" className="text-purple-500">
+            <a
+              href="https://rickandmortyapi.com/"
+              className="text-purple-700 dark:text-purple-400"
+            >
               The Rick and Morty API
             </a>{" "}
             by Axel Fuhrmann.

@@ -30,6 +30,7 @@ function DarkModeSwitch() {
 
   return (
     <Switch
+      aria-hidden
       checked={resolvedTheme === Themes.DARK}
       onChange={handleToggle}
       className={`${

@@ -52,28 +52,28 @@ function Navbar() {
           <div>
             <Link
               href="/"
-              className="font-bold font-heading text-5xl text-zinc-800 dark:text-zinc-100"
+              className="font-bold font-heading text-4xl text-zinc-800 dark:text-zinc-100"
             >
               schwiftyDB
             </Link>
           </div>
           {!hamburgerMode && (
-            <div className="flex text-lg uppercase text-zinc-500">
+            <div className="flex text-lg uppercase text-zinc-600 dark:text-zinc-400">
               <Link
                 href="/characters"
-                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-xl hover:text-zinc-800 hover:dark:text-zinc-200 mx-2 my-0.5 transition"
               >
                 characters
               </Link>
               <Link
                 href="/locations"
-                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-xl hover:text-zinc-800 hover:dark:text-zinc-200 mx-2 my-0.5 transition"
               >
                 locations
               </Link>
               <Link
                 href="/episodes"
-                className="font-heading text-2xl hover:text-zinc-800 hover:dark:text-zinc-300 mx-2 my-0.5 transition"
+                className="font-heading text-xl hover:text-zinc-800 hover:dark:text-zinc-200 mx-2 my-0.5 transition"
               >
                 episodes
               </Link>
